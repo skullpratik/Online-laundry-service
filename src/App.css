@@ -1,0 +1,17 @@
+/* App.css */
+main {
+  padding-top: 80px;
+}
+
+.page-section {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+  .page-section {
+    margin: 40px auto;
+    padding: 0 15px;
+  }
+}

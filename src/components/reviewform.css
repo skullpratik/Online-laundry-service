@@ -1,0 +1,46 @@
+/* ReviewForm.css */
+.review-form-section {
+  background: #f9f9f9;
+  padding: 60px 20px;
+  text-align: center;
+  font-family: 'Times New Roman', serif;
+}
+.review-form-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #222;
+}
+.review-form {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.review-form input,
+.review-form textarea {
+  padding: 12px 15px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color .3s;
+}
+.review-form input:focus,
+.review-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+.review-form button {
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .3s;
+}
+.review-form button:hover {
+  background: #0056b3;
+}

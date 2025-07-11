@@ -1,0 +1,73 @@
+.page-section {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  color: #2c3e50;
+  background: linear-gradient(to bottom right, #f9f9f9, #e0f7fa);
+}
+
+.page-section h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #0077b6;
+}
+
+.page-section p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 5px solid #00b4d8;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  border-top-color: #0077b6;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 100px;
+  height: 100px;
+  background: rgba(0, 183, 255, 0.1);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.service-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  color: #0077b6;
+  position: relative;
+  z-index: 1;
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
