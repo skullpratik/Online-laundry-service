@@ -17,7 +17,7 @@ const Hero = () => (
         <div className="hero-buttons">
            <Link to="/book-now" className="btn book-now">Book Now</Link>
           <a
-            href="https://wa.me/9819740701?text=Hi%20I%20want%20to%20book%20a%20laundry%20pickup"
+            href="https://wa.me/9324125329?text=Hi%20I%20want%20to%20book%20a%20laundry%20pickup"
             className="btn whatsapp-btn"
             target="_blank"
             rel="noopener noreferrer"

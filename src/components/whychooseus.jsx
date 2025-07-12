@@ -1,4 +1,4 @@
-import './WhyChooseUs.css';
+import './WhyChooseus.css';
 
 const WhyChooseUs = () => {
   return (
