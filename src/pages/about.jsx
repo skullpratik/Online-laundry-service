@@ -3,31 +3,44 @@ import './About.css';
 
 const AboutPage = () => {
   return (
-    <div className="page-section about-section">
-      <h1>About Us</h1>
-      <p className="intro">
-        Welcome to <strong>FreshFold Laundry</strong> – your trusted neighborhood laundry partner.
-      </p>
+    <div className="about-wrapper">
+      <div className="about-hero">
+        <h1>About Shiv Krupa Laundry</h1>
+        <p>Your trusted partner for fresh, clean, and crisp clothes — delivered to your doorstep.</p>
+      </div>
 
-      <div className="about-content">
+      <div className="about-section">
+        <h2>Who We Are</h2>
         <p>
-          We are a locally-owned laundry business dedicated to providing high-quality, affordable, and reliable laundry services.
-          From doorstep pickup to next-day delivery, we take pride in making your laundry experience seamless and stress-free.
+          Shiv Krupa Laundry is a locally rooted laundry business with a mission to simplify your daily life by handling your clothes with professional care. We pride ourselves in being reliable, punctual, and affordable for all your laundry needs.
         </p>
+      </div>
 
+      <div className="about-section">
+        <h2>What We Do</h2>
+        <ul>
+          <li>✔️ Morning pickup and next-morning doorstep delivery</li>
+          <li>✔️ Ironing at ₹9 per cloth for regular customers</li>
+          <li>✔️ Dry Cleaning at ₹80 per cloth</li>
+          <li>✔️ Bleaching at ₹70 (₹50 if bleach is provided)</li>
+          <li>✔️ Stain removal starting at ₹120 (no guarantee but best effort)</li>
+          <li>✔️ Raffu (minor cloth repair)</li>
+        </ul>
+      </div>
+
+      <div className="about-section">
+        <h2>Why Choose Us?</h2>
         <p>
-          Whether it's regular ironing, delicate dry cleaning, tough stain removal, or mending services like raffu — our team
-          of trained professionals handles your clothes with utmost care. We believe in using fabric-safe products, eco-friendly methods,
-          and offering transparent pricing with no hidden charges.
+          We are committed to consistency and customer satisfaction. Whether it's your daily wear, festive attire, or delicate fabrics — we treat each garment with special attention. Our team ensures timely pickup, transparent pricing, and great results.
         </p>
+      </div>
 
+      <div className="about-contact">
+        <h2>Get in Touch</h2>
         <p>
-          Our goal is to build long-term relationships with customers through trust, punctuality, and top-notch service.
-          We understand your busy schedule — that's why we offer free pickup & delivery for our regular customers.
-        </p>
-
-        <p className="closing">
-          Give us a try, and you’ll never have to worry about laundry again. Because at FreshFold, <strong>“We care for your clothes like our own.”</strong>
+          📍 Located in: [Vile Parle(E), Mubai] <br />
+          📞 Call or WhatsApp us: <a href="https://wa.me/9324125329?text=Hi%20I%20want%20to%20book%20a%20laundry%20pickup" target="_blank" rel="noreferrer">+91-9324125329</a> <br />
+          🕒 Timings: 8:00 AM – 10:00 PM (All Days)
         </p>
       </div>
     </div>

@@ -1,0 +1,94 @@
+.about-wrapper {
+  padding: 60px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #2c3e50;
+  background: #f9fcff;
+  line-height: 1.7;
+}
+
+.about-hero {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.about-hero h1 {
+  font-size: 3rem;
+  color: #1a3d5d;
+  margin-bottom: 10px;
+}
+
+.about-hero p {
+  font-size: 1.2rem;
+  color: #4a6b82;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.about-section {
+  max-width: 900px;
+  margin: 30px auto;
+  background: #ffffff;
+  border-left: 6px solid #4ca1af;
+  padding: 25px 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  border-radius: 10px;
+}
+
+.about-section h2 {
+  color: #293241;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+}
+
+.about-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.about-section ul li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.about-section ul li::before {
+  content: '✔️';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.about-contact {
+  max-width: 700px;
+  margin: 50px auto 0;
+  text-align: center;
+  font-size: 1.1rem;
+  background: #e8f6f9;
+  padding: 30px;
+  border-radius: 10px;
+  color: #2c3e50;
+}
+
+.about-contact a {
+  color: #0077b6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.about-contact a:hover {
+  text-decoration: underline;
+}
+
+@media(max-width: 768px) {
+  .about-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .about-section {
+    padding: 20px;
+  }
+
+  .about-contact {
+    font-size: 1rem;
+  }
+}
