@@ -15,8 +15,8 @@ import Footer from './components/footer';
 import PricingPage from './pages/pricing';
 import ServicesPage from './pages/services';
 import AboutPage from './pages/about';
-import AdminLogin from './pages/adminLogin';         
-import CustomerLogin from './pages/customerLogin'; 
+import AdminLogin from './pages/admin';         
+import CustomerLogin from './pages/customer'; 
 import BookingForm from './pages/Booking';
 
 function HomePage() {
