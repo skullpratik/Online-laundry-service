@@ -1,5 +1,5 @@
 import React from 'react';
-import './reviewform.css';
+import './Reviewform.css';
 
 const ReviewForm = () => {
   return (
