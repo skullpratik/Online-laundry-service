@@ -1,4 +1,4 @@
-/* Header Container */
+/* Header container */
 .header {
   position: fixed;
   top: 0;
@@ -9,7 +9,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Inner Flex Wrapper */
+/* Layout wrapper */
 .header-content {
   max-width: 1200px;
   margin: auto;
@@ -17,11 +17,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: nowrap;
-  position: relative;
+  flex-wrap: wrap;
 }
 
-/* Logo */
+/* Logo section */
 .logo-box {
   display: flex;
   align-items: center;
@@ -41,45 +40,57 @@
   color: #fff;
 }
 
-/* Toggle Button (mobile) */
+/* Hamburger menu icon (mobile only) */
 .menu-toggle {
   display: none;
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #fff;
   cursor: pointer;
 }
 
-/* Dropdown Menu (mobile + desktop center layout) */
+/* Nav + Buttons wrapper */
 .menu-content {
   display: flex;
   align-items: center;
   gap: 25px;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
-/* Nav Links */
+/* Navigation links */
 .nav-links {
   display: flex;
   gap: 25px;
-  justify-content: center;
 }
 
 .nav-links a {
+  position: relative;
   color: #fff;
   text-decoration: none;
   font-size: 1.15rem;
-  transition: color 0.3s ease;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
-  text-decoration: underline;
+/* Underline effect on hover */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 1px;
+  left: 0;
+  background-color: #fff;
+  transition: width 0.3s ease;
 }
 
-/* Buttons */
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Login buttons */
 .login-buttons {
   display: flex;
   gap: 12px;
-  justify-content: flex-end;
 }
 
 .btn {
@@ -92,10 +103,6 @@
   transition: all 0.3s ease;
 }
 
-.btn:hover {
-  transform: scale(1.05);
-}
-
 .btn.admin {
   background-color: #1abc9c;
 }
@@ -104,7 +111,11 @@
   background-color: #f39c12;
 }
 
-/* ✅ Mobile View */
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile view */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -112,51 +123,34 @@
 
   .menu-content {
     flex-direction: column;
-    background: linear-gradient(to right, #2c3e50, #4ca1af);
     width: 100%;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    overflow: hidden;
     max-height: 0;
     opacity: 0;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: all 0.4s ease;
-    z-index: 999;
-    padding: 0 15px;
+    overflow: hidden;
+    align-items: center;
   }
 
   .menu-content.open {
     max-height: 500px;
     opacity: 1;
-    transform: scaleY(1);
-    padding: 15px;
+    margin-top: 10px;
   }
 
+  .nav-links,
   .login-buttons {
     flex-direction: column;
-    align-items: stretch;
     width: 100%;
     gap: 10px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    gap: 10px;
+    align-items: center;
   }
 
   .nav-links a,
   .btn {
-    width: 100%;
+    width: auto;
     text-align: center;
-    padding: 10px;
   }
 
   .logo-text {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 }
-

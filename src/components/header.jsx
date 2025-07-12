@@ -16,22 +16,29 @@ const Header = () => {
           <span className="logo-text">SKLdrycleaner's</span>
         </Link>
 
-        {/* Hamburger icon for mobile */}
+        {/* Hamburger icon */}
         <div className="menu-toggle" onClick={toggleMenu}>
           ☰
         </div>
 
-        {/* Nav + buttons - toggleable */}
+        {/* Nav + Buttons */}
         <div className={`menu-content ${isMenuOpen ? 'open' : ''}`}>
           <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/services">Services</Link>
-            <Link to="/pricing">Pricing</Link>
-            <Link to="/about">About</Link>
+            <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
+            <Link to="/services" onClick={() => setIsMenuOpen(false)}>Services</Link>
+            <Link to="/pricing" onClick={() => setIsMenuOpen(false)}>Pricing</Link>
+            <Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link>
           </nav>
           <div className="login-buttons">
-            <a href="#" className="btn admin">Admin Login</a>
-            <a href="#" className="btn customer">Customer Login</a>
+            <Link to="/admin-login" className="btn admin" onClick={() => isMenuOpen && toggleMenu()}>
+  Admin Login
+</Link>
+
+            <Link to="/customer-login" className="btn customer" onClick={() => isMenuOpen && toggleMenu()}>
+  Customer Login
+</Link>
+
+
           </div>
         </div>
       </div>

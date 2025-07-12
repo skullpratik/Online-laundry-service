@@ -3,7 +3,7 @@ import './Pricing.css';
 
 const pricingPlans = [
   {
-    title: "Ironing (Regular Customers)",
+    title: "Ironing ",
     price: "₹9",
     frequency: "Per cloth",
     features: [
@@ -84,7 +84,7 @@ const PricingPage = () => {
               ))}
             </ul>
             {note && <div className="note">{note}</div>}
-            <button className="btn-select">Select Service</button>
+            
           </div>
         ))}
       </div>
