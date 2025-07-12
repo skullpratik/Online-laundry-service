@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './BookingForm.css';
+import './bookingForm.css';
 
 const BookingForm = () => {
   const [formData, setFormData] = useState({
@@ -70,7 +70,7 @@ const BookingForm = () => {
             <textarea name="address" value={formData.address} onChange={handleChange} rows="3" />
             {errors.address && <small className="error">{errors.address}</small>}
             </label>
-            
+
          <label>
           Number of Clothes:
           <input type="number" name="clothCount" value={formData.clothCount} onChange={handleChange} />

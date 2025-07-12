@@ -1,5 +1,5 @@
 import React from 'react';
-import './Pricing.css';
+import './pricing.css';
 
 const pricingPlans = [
   {
