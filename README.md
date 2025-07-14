@@ -1,7 +1,7 @@
 # 🧺 Laundry Booking Web App – MERN Stack
 An end-to-end Laundry Booking Application built with the MERN stack with user login, service bookings, review system, and admin control panel.
 
-[🌐 Visit Now](https://your-laundry-app.vercel.app)
+[🌐 Visit Now](https://6873481af0a864273768c3ec--amazing-monstera-60ff65.netlify.app/)
 
 ---
 
@@ -45,5 +45,5 @@ An end-to-end Laundry Booking Application built with the MERN stack with user lo
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/laundry-project.git
+git clone https://github.com/skullpratik/Online-laundry-service.git
 cd laundry-project
