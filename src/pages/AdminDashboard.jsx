@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // Simple client-side admin check
+    if (localStorage.getItem('isAdmin') !== 'true') {
+      navigate('/admin-login');
+      return;
+    }
     setLoading(true);
-    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/bookings`)
+    fetch('/api/bookings')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch bookings');
         return res.json();
@@ -20,7 +27,7 @@ const AdminDashboard = () => {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [navigate]);
 
   if (loading) return <div style={{ padding: 40 }}>Loading bookings...</div>;
   if (error) return <div style={{ color: 'red', padding: 40 }}>{error}</div>;

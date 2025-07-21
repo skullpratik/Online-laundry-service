@@ -14,21 +14,30 @@ const AdminLoginModal = ({ open, onClose }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    setTimeout(() => {
-      if (form.id === ADMIN_ID && form.password === ADMIN_PASS) {
+    try {
+      const response = await fetch('/api/auth/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.id, password: form.password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
         localStorage.setItem('isAdmin', 'true');
         setLoading(false);
         onClose();
         window.location.href = '/admin-dashboard';
       } else {
-        setError('Invalid admin credentials');
+        setError(data.message || 'Login failed');
         setLoading(false);
       }
-    }, 600);
+    } catch (err) {
+      setError('Server error');
+      setLoading(false);
+    }
   };
 
   return (

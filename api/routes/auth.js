@@ -44,4 +44,22 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Admin login route
+router.post('/admin-login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const admin = await User.findOne({ email, role: 'admin' });
+    if (!admin) {
+      return res.status(401).json({ message: 'Admin not found' });
+    }
+    if (admin.password !== password) {
+      return res.status(401).json({ message: 'Invalid password' });
+    }
+    // Optionally, set a session or return a token here
+    res.json({ message: 'Admin login successful' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router; 
