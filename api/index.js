@@ -8,7 +8,10 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: [
+    'https://online-laundry-service-hntiuu4qe-pratiks-projects-41f126a0.vercel.app',
+    'https://online-laundry-service.vercel.app'
+  ],
   credentials: true,
 }));
 app.use(express.json());
