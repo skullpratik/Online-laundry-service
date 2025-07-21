@@ -90,15 +90,15 @@ const BookingForm = () => {
         </label>
 
         <label>
-          Address:
+            Address:
           <textarea
             rows="3"
             {...register('address', { required: 'Address is required' })}
           />
           {errors.address && <small className="error">{errors.address.message}</small>}
-        </label>
+            </label>
 
-        <label>
+         <label>
           Number of Clothes:
           <input
             type="number"
