@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './hero.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
@@ -7,10 +7,14 @@ import SignInModal from './SignInModal';
 const Hero = () => {
   const { user } = useAuth();
   const [showModal, setShowModal] = useState(false);
+  const hasShownPopup = useRef(false);
 
   useEffect(() => {
-    if (!user) {
-      const timer = setTimeout(() => setShowModal(true), 3000);
+    if (!user && !hasShownPopup.current) {
+      const timer = setTimeout(() => {
+        setShowModal(true);
+        hasShownPopup.current = true;
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [user]);
