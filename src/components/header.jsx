@@ -14,9 +14,23 @@ const Header = () => {
   const navigate = useNavigate();
   const [adminModalOpen, setAdminModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
+  const adminDropdownRef = useRef(null);
 
   const getFirstName = (nameOrEmailOrPhone) => {
     if (!nameOrEmailOrPhone) return '';
+    if (user?.name) return user.name.split(' ')[0];
+    if (user?.email) return user.email.split('@')[0];
+    if (user?.phone) return user.phone;
+    return '';
+  };
+
+  // Check if admin is logged in
+  const isAdmin = typeof window !== 'undefined' && localStorage.getItem('isAdmin') === 'true';
+
+  // Helper to get display name
+  const getDisplayName = () => {
+    if (isAdmin) return 'Admin';
     if (user?.name) return user.name.split(' ')[0];
     if (user?.email) return user.email.split('@')[0];
     if (user?.phone) return user.phone;
@@ -38,6 +52,21 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [dropdownOpen]);
 
+  // Close admin dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (adminDropdownRef.current && !adminDropdownRef.current.contains(event.target)) {
+        setAdminDropdownOpen(false);
+      }
+    }
+    if (adminDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [adminDropdownOpen]);
+
   // Close menu on navigation (optional, improves UX)
   const handleNavClick = () => setMenuOpen(false);
 
@@ -57,100 +86,143 @@ const Header = () => {
 
         {/* Nav + Buttons */}
         <div className={`menu-content${menuOpen ? ' open' : ''}`}>
+          {/* User/Admin dropdown at top of menu on mobile */}
+          {(isAdmin || user) && (
+            <div style={{ display: 'flex', alignItems: 'center', fontWeight: 600, color: '#222', fontSize: '1rem', gap: 8, position: 'relative', width: '100%', padding: '8px 0', borderBottom: '1px solid #eee' }}>
+              <FaUserCircle size={28} style={{ marginRight: 6 }} />
+              {isAdmin ? (
+                <div ref={adminDropdownRef}>
+                  <button
+                    className="user-menu-btn"
+                    onClick={() => setAdminDropdownOpen((open) => !open)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontWeight: 600,
+                      color: '#222',
+                      fontSize: '1rem',
+                      padding: 0
+                    }}
+                  >
+                    Admin
+                  </button>
+                  {adminDropdownOpen && (
+                    <div
+                      className="user-dropdown"
+                      style={{
+                        position: 'absolute',
+                        top: 36,
+                        left: 0,
+                        background: '#fff',
+                        boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+                        borderRadius: 8,
+                        minWidth: 120,
+                        zIndex: 100,
+                        padding: 0
+                      }}
+                    >
+                      <button
+                        className="user-dropdown-item"
+                        style={{
+                          width: '100%',
+                          background: 'none',
+                          border: 'none',
+                          padding: '12px 18px',
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          fontSize: '1rem',
+                          color: '#e74c3c',
+                          borderRadius: '0 0 8px 8px',
+                        }}
+                        onClick={() => {
+                          localStorage.removeItem('isAdmin');
+                          window.location.reload();
+                        }}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div ref={dropdownRef}>
+                  <button
+                    className="user-menu-btn"
+                    onClick={() => setDropdownOpen((open) => !open)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontWeight: 600,
+                      color: '#222',
+                      fontSize: '1rem',
+                      padding: 0
+                    }}
+                  >
+                    {getDisplayName()}
+                  </button>
+                  {dropdownOpen && (
+                    <div
+                      className="user-dropdown"
+                      style={{
+                        position: 'absolute',
+                        top: 36,
+                        left: 0,
+                        background: '#fff',
+                        boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+                        borderRadius: 8,
+                        minWidth: 120,
+                        zIndex: 100,
+                        padding: 0
+                      }}
+                    >
+                      <button
+                        className="user-dropdown-item"
+                        style={{
+                          width: '100%',
+                          background: 'none',
+                          border: 'none',
+                          padding: '12px 18px',
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          fontSize: '1rem',
+                          color: '#e74c3c',
+                          borderRadius: '0 0 8px 8px',
+                        }}
+                        onClick={() => {
+                          logout();
+                        }}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+          {/* Show Admin and Login buttons at top if no one is logged in */}
+          {!(isAdmin || user) && (
+            <div style={{ width: '100%', padding: '8px 0', borderBottom: '1px solid #eee', display: 'flex', gap: 8 }}>
+              <button className="btn admin" style={{ background: '#29307a', color: '#fff' }} onClick={() => setAdminModalOpen(true)}>
+                Admin
+              </button>
+              <button className="btn customer" onClick={() => setShowModal(true)}>
+                Login
+              </button>
+            </div>
+          )}
           <nav className="nav-links">
             <Link to="/" onClick={handleNavClick}>Home</Link>
             <Link to="/services" onClick={handleNavClick}>Services</Link>
             <Link to="/pricing" onClick={handleNavClick}>Pricing</Link>
             <Link to="/about" onClick={handleNavClick}>About</Link>
           </nav>
-          <div className="login-buttons">
-            <button className="btn admin" style={{ background: '#29307a', color: '#fff' }} onClick={() => setAdminModalOpen(true)}>
-              Admin
-            </button>
-            {user ? (
-              <div style={{ position: 'relative', display: 'inline-block' }} ref={dropdownRef}>
-                <button
-                  className="user-menu-btn"
-                  onClick={() => setDropdownOpen((open) => !open)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontWeight: 500,
-                    color: '#222',
-                    fontSize: '1rem',
-                    padding: 0
-                  }}
-                >
-                  <FaUserCircle size={28} style={{ marginRight: 6 }} />
-                  {getFirstName(user.name || user.email || user.phone)}
-                </button>
-                {dropdownOpen && (
-                  <div
-                    className="user-dropdown"
-                    style={{
-                      position: 'absolute',
-                      top: 36,
-                      left: 0,
-                      background: '#fff',
-                      boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
-                      borderRadius: 8,
-                      minWidth: 160,
-                      zIndex: 100,
-                      padding: 0
-                    }}
-                  >
-                    <button
-                      className="user-dropdown-item"
-                      style={{
-                        width: '100%',
-                        background: 'none',
-                        border: 'none',
-                        padding: '12px 18px',
-                        textAlign: 'left',
-                        cursor: 'pointer',
-                        fontSize: '1rem',
-                        color: '#16a085',
-                        borderBottom: '1px solid #eee',
-                      }}
-                      onClick={() => {
-                        setDropdownOpen(false);
-                        navigate('/my-bookings');
-                      }}
-                    >
-                      View your booking
-                    </button>
-                    <button
-                      className="user-dropdown-item"
-                      style={{
-                        width: '100%',
-                        background: 'none',
-                        border: 'none',
-                        padding: '12px 18px',
-                        textAlign: 'left',
-                        cursor: 'pointer',
-                        fontSize: '1rem',
-                        color: '#e74c3c',
-                        borderRadius: '0 0 8px 8px',
-                      }}
-                      onClick={() => {
-                        setDropdownOpen(false);
-                        logout();
-                      }}
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <button className="btn customer" onClick={() => setShowModal(true)}>
-                Login
-              </button>
-            )}
-          </div>
         </div>
       </div>
       <SignInModal open={showModal} onClose={() => setShowModal(false)} />
