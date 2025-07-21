@@ -32,4 +32,5 @@ app.get('/api/test', (req, res) => {
   res.json({ message: 'API is working!' });
 });
 
-module.exports = app; 
+const serverless = require('serverless-http');
+module.exports = serverless(app); 
