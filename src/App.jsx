@@ -19,6 +19,7 @@ import AdminLogin from './pages/admin';
 import CustomerLogin from './pages/customer'; 
 import BookingForm from './pages/Booking';
 import MyBookings from './pages/MyBookings';
+import AdminDashboard from './pages/AdminDashboard';
 
 function HomePage() {
   return (
@@ -45,6 +46,7 @@ function App() {
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/book-now" element={<BookingForm />} />
         <Route path="/my-bookings" element={<MyBookings />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </main>
       <Footer />
