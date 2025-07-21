@@ -1,8 +1,11 @@
 /* Hero.css */
 .hero {
-  background: linear-gradient(to right, #dfe7cf, #e3f792);
-  padding: 80px 20px;
-  font-family: 'Times New Roman', serif;
+  background: linear-gradient(120deg, #e0f7fa 0%, #f9f9ff 100%);
+  padding: 80px 20px 60px 20px;
+  font-family: 'Inter', 'Segoe UI', serif;
+  min-height: 60vh;
+  position: relative;
+  overflow: hidden;
 }
 .hero-content {
   max-width: 1200px;
@@ -11,76 +14,101 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  min-height: 80vh;
+  min-height: 60vh;
 }
 .hero-text {
   flex: 1;
   min-width: 300px;
   padding-right: 30px;
+  animation: slideUp 1.1s cubic-bezier(.4,1.4,.6,1) both;
 }
 .intro-text {
   font-size: 1.3rem;
-  color: #004d66;
+  color: #16a085;
   font-style: italic;
   margin-bottom: 12px;
+  letter-spacing: 1px;
+  animation: fadeIn 1.2s;
 }
 .hero-heading {
   font-size: 3rem;
   color: #29307a;
   margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  animation: fadeIn 1.3s;
 }
 .hero-description {
   font-size: 1.2rem;
   color: #37474f;
   margin-bottom: 30px;
+  animation: fadeIn 1.4s;
 }
 .hero-buttons {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  margin-bottom: 8px;
 }
-.btn.primary-btn {
-  background: #0d47a1;
+.btn.book-now {
+  background: linear-gradient(90deg, #f98d3a 60%, #f6c90e 100%);
   color: #fff;
+  font-weight: 600;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.08rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(255, 111, 0, 0.13);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  animation: fadeIn 1.5s;
 }
-.btn.primary-btn:hover {
-  background: #1565c0;
+.btn.book-now:hover {
+  background: linear-gradient(90deg, #f6c90e 60%, #f98d3a 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(255, 111, 0, 0.18);
 }
 .btn.whatsapp-btn {
   background: #0dd04e;
   color: #fff;
+  font-weight: 600;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.08rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(13, 208, 78, 0.13);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  animation: fadeIn 1.6s;
 }
 .btn.whatsapp-btn:hover {
   background: #1ebc59;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(13, 208, 78, 0.18);
 }
 .hero-image {
   flex: 1;
   min-width: 280px;
   text-align: center;
+  animation: fadeIn 1.7s;
 }
 .hero-image img {
   max-width: 100%;
   border-radius: 10px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
-
-.btn.book-now {
-  background-color: #f98d3a;
-  color: #fff;
+.view-booking-link {
+  display: inline-block;
+  margin-top: 6px;
+  color: #16a085;
+  text-decoration: underline;
   font-weight: 600;
-  border: none;
-  padding: 12px 24px;
-  font-size: 1.05rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1.08rem;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
 }
-
-.btn.book-now:hover {
-  background-color: #e65100;
-  transform: translateY(-2px);
+.view-booking-link:hover {
+  color: #117864;
+  text-decoration: none;
 }
-
 @media(max-width: 768px) {
   .hero-content {
     flex-direction: column;

@@ -1,85 +1,120 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '../AuthContext';
+import SignInModal from '../components/SignInModal';
 import './bookingform.css';
 
 const BookingForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    clothCount: '',
-    serviceType: '',
-    notes: '',
+  const { user, token } = useAuth();
+  const [showModal, setShowModal] = useState(false);
+  const [showViewBookings, setShowViewBookings] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: {
+      clothCount: 1
+    }
   });
 
-  const [errors, setErrors] = useState({});
+  // Show sign-in modal after 4 seconds if not logged in
+  useEffect(() => {
+    if (!user) {
+      const timer = setTimeout(() => setShowModal(true), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [user]);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // Show 'View your booking' when logged in
+  useEffect(() => {
+    setShowViewBookings(!!user);
+  }, [user]);
 
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.phone.match(/^\d{10}$/)) newErrors.phone = 'Enter valid 10-digit phone';
-    if (!formData.address.trim()) newErrors.address = 'Address is required';
-    if (!formData.clothCount || isNaN(formData.clothCount) || formData.clothCount <= 0)
-      newErrors.clothCount = 'Enter a valid number of clothes';
-    if (!formData.serviceType) newErrors.serviceType = 'Service type is required';
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formErrors = validate();
-    setErrors(formErrors);
-
-    if (Object.keys(formErrors).length === 0) {
-      // ✅ Submit logic here
-      console.log('Form submitted:', formData);
+  const onSubmit = async (data) => {
+    if (!user) {
+      setShowModal(true);
+      return;
+    }
+    console.log('Submitting booking:', data);
+    const payload = { ...data, clothCount: Number(data.clothCount) };
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/bookings`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+      if (!response.ok) throw new Error('Failed to submit booking');
+      const result = await response.json();
+      console.log('Booking created:', result);
       alert('Booking submitted!');
-      setFormData({
-        name: '',
-        phone: '',
-        address: '',
-        clothCount: '',
-        serviceType: '',
-        notes: ''
-      });
+      reset();
+    } catch (err) {
+      alert('Error: ' + err.message);
     }
   };
 
   return (
-    <div className="booking-form-container">
+    <div className="booking-form-container fade-in">
       <h2>Book a Laundry Pickup</h2>
-      <form onSubmit={handleSubmit} className="booking-form">
-
+      <form onSubmit={handleSubmit(onSubmit)} className="booking-form" noValidate>
         <label>
           Name:
-          <input type="text" name="name" value={formData.name} onChange={handleChange} />
-          {errors.name && <small className="error">{errors.name}</small>}
+          <input
+            type="text"
+            {...register('name', { required: 'Name is required' })}
+          />
+          {errors.name && <small className="error">{errors.name.message}</small>}
         </label>
 
         <label>
           Phone Number:
-          <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
-          {errors.phone && <small className="error">{errors.phone}</small>}
+          <input
+            type="text"
+            {...register('phone', {
+              required: 'Phone is required',
+              pattern: {
+                value: /^\d{10}$/,
+                message: 'Enter valid 10-digit phone',
+              },
+            })}
+          />
+          {errors.phone && <small className="error">{errors.phone.message}</small>}
         </label>
 
         <label>
-            Address:
-            <textarea name="address" value={formData.address} onChange={handleChange} rows="3" />
-            {errors.address && <small className="error">{errors.address}</small>}
-            </label>
+          Address:
+          <textarea
+            rows="3"
+            {...register('address', { required: 'Address is required' })}
+          />
+          {errors.address && <small className="error">{errors.address.message}</small>}
+        </label>
 
-         <label>
+        <label>
           Number of Clothes:
-          <input type="number" name="clothCount" value={formData.clothCount} onChange={handleChange} />
-          {errors.clothCount && <small className="error">{errors.clothCount}</small>}
+          <input
+            type="number"
+            {...register('clothCount', {
+              required: 'Number of clothes is required',
+              min: { value: 1, message: 'Enter a valid number of clothes' },
+            })}
+          />
+          {errors.clothCount && <small className="error">{errors.clothCount.message}</small>}
         </label>
 
         <label>
           Service Type:
-          <select name="serviceType" value={formData.serviceType} onChange={handleChange}>
+          <select
+            {...register('serviceType', { required: 'Service type is required' })}
+          >
             <option value="">Select a service</option>
             <option value="Ironing">Ironing</option>
             <option value="Dry Cleaning">Dry Cleaning</option>
@@ -88,16 +123,29 @@ const BookingForm = () => {
             <option value="Raffu">Raffu</option>
             <option value="Other">Other</option>
           </select>
-          {errors.serviceType && <small className="error">{errors.serviceType}</small>}
+          {errors.serviceType && <small className="error">{errors.serviceType.message}</small>}
         </label>
 
         <label>
           Notes / Cloth Description:
-          <textarea name="notes" value={formData.notes} onChange={handleChange} rows="4" />
+          <textarea
+            rows="4"
+            {...register('notes')}
+          />
         </label>
 
-        <button type="submit" className="btn book-btn">Submit Booking</button>
+        <button type="submit" className="btn book-btn animated-btn" disabled={isSubmitting}>
+          {isSubmitting ? 'Submitting...' : 'Submit Booking'}
+        </button>
+        {showViewBookings && (
+          <div style={{ marginTop: 16, textAlign: 'center' }}>
+            <a href="/my-bookings" style={{ color: '#16a085', textDecoration: 'underline', fontWeight: 500 }}>
+              View your booking
+            </a>
+          </div>
+        )}
       </form>
+      <SignInModal open={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 };

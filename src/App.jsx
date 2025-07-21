@@ -18,6 +18,7 @@ import AboutPage from './pages/about';
 import AdminLogin from './pages/admin';         
 import CustomerLogin from './pages/customer'; 
 import BookingForm from './pages/Booking';
+import MyBookings from './pages/MyBookings';
 
 function HomePage() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/customer-login" element={<CustomerLogin />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/book-now" element={<BookingForm />} />
+        <Route path="/my-bookings" element={<MyBookings />} />
         </Routes>
       </main>
       <Footer />
