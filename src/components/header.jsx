@@ -16,6 +16,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
   const adminDropdownRef = useRef(null);
+  const menuContentRef = useRef(null);
 
   const getFirstName = (nameOrEmailOrPhone) => {
     if (!nameOrEmailOrPhone) return '';
@@ -67,6 +68,21 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [adminDropdownOpen]);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuOpen && menuContentRef.current && !menuContentRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    }
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [menuOpen]);
+
   // Close menu on navigation (optional, improves UX)
   const handleNavClick = () => setMenuOpen(false);
 
@@ -85,7 +101,7 @@ const Header = () => {
         </div>
 
         {/* Nav + Buttons */}
-        <div className={`menu-content${menuOpen ? ' open' : ''}`}>
+        <div ref={menuContentRef} className={`menu-content${menuOpen ? ' open' : ''}`}>
           {/* User/Admin dropdown at top of menu on mobile */}
           {(isAdmin || user) && (
             <div style={{ display: 'flex', alignItems: 'center', fontWeight: 600, color: '#222', fontSize: '1rem', gap: 8, position: 'relative', width: '100%', padding: '8px 0', borderBottom: '1px solid #eee' }}>
@@ -139,7 +155,7 @@ const Header = () => {
                         }}
                         onClick={() => {
                           localStorage.removeItem('isAdmin');
-                          window.location.reload();
+                          navigate('/');
                         }}
                       >
                         Logout
