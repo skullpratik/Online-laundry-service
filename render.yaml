@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: my-laundry-backend
+    env: node
+    rootDir: api
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false 
