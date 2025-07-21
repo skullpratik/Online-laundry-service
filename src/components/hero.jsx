@@ -37,13 +37,7 @@ const Hero = () => {
             WhatsApp Us
           </a>
           </div>
-          {user && (
-            <div style={{ marginTop: 16, textAlign: 'left' }}>
-              <a href="/my-bookings" className="view-booking-link">
-                View your booking
-              </a>
-        </div>
-          )}
+          {/* Removed 'View your booking' link from hero section as requested */}
       </div>
       <div className="hero-image">
         <img src="/online-laundry-service-1.png" alt="Laundry Hero"/>

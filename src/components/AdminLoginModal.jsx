@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ADMIN_ID = 'admin';
 const ADMIN_PASS = '9819';
@@ -7,6 +8,7 @@ const AdminLoginModal = ({ open, onClose }) => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   if (!open) return null;
 
@@ -29,7 +31,7 @@ const AdminLoginModal = ({ open, onClose }) => {
         localStorage.setItem('isAdmin', 'true');
         setLoading(false);
         onClose();
-        window.location.href = '/admin-dashboard';
+        navigate('/admin-dashboard');
       } else {
         setError(data.message || 'Login failed');
         setLoading(false);
