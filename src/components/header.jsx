@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import { useAuth } from '../AuthContext';
 import SignInModal from './SignInModal';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaClipboardList } from 'react-icons/fa';
 import AdminLoginModal from './AdminLoginModal';
 
 const Header = () => {
@@ -164,7 +164,7 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <div ref={dropdownRef}>
+                <div ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <button
                     className="user-menu-btn"
                     onClick={() => setDropdownOpen((open) => !open)}
@@ -181,6 +181,24 @@ const Header = () => {
                     }}
                   >
                     {getDisplayName()}
+                  </button>
+                  <button
+                    className="user-menu-btn"
+                    title="View Booking"
+                    onClick={() => navigate('/my-bookings')}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      color: '#16a085',
+                      fontSize: '1.2rem',
+                      marginLeft: 2
+                    }}
+                  >
+                    <FaClipboardList size={22} style={{ marginRight: 2 }} />
+                    <span style={{ fontSize: '1rem', fontWeight: 500 }}>View Booking</span>
                   </button>
                   {dropdownOpen && (
                     <div
