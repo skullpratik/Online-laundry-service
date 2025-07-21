@@ -68,9 +68,9 @@
   color: #fff;
   font-weight: 700;
   border: none;
-  padding: 16px 36px;
-  font-size: 1.18rem;
-  border-radius: 12px;
+  padding: 12px 26px;
+  font-size: 1.05rem;
+  border-radius: 10px;
   box-shadow: 0 6px 18px rgba(255, 111, 0, 0.13);
   transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
   animation: fadeIn 1.5s;
@@ -86,9 +86,9 @@
   color: #fff;
   font-weight: 700;
   border: none;
-  padding: 16px 36px;
-  font-size: 1.18rem;
-  border-radius: 12px;
+  padding: 12px 26px;
+  font-size: 1.05rem;
+  border-radius: 10px;
   box-shadow: 0 6px 18px rgba(13, 208, 78, 0.13);
   transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
   animation: fadeIn 1.6s;
@@ -148,9 +148,9 @@
   }
   .btn.book-now, .btn.whatsapp-btn {
     width: 90vw;
-    max-width: 340px;
-    font-size: 1.08rem;
-    padding: 14px 0;
-    border-radius: 10px;
+    max-width: 260px;
+    font-size: 0.98rem;
+    padding: 10px 0;
+    border-radius: 8px;
   }
 }

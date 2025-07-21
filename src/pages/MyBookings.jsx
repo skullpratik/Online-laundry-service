@@ -106,7 +106,17 @@ const MyBookings = () => {
               <div><strong>Phone:</strong> {b.phone}</div>
               <div><strong>Address:</strong> {b.address}</div>
               <div><strong>Cloth Count:</strong> {b.clothCount}</div>
-              <div><strong>Status:</strong> {b.status}</div>
+              <div><strong>Status:</strong> <span style={{
+                display: 'inline-block',
+                padding: '2px 12px',
+                borderRadius: 12,
+                background: b.status === 'delivered' ? '#16a085' : b.status === 'on the way' ? '#f6c90e' : b.status === 'processed' ? '#f98d3a' : b.status === 'accepted' ? '#0077b6' : '#e74c3c',
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: '0.98rem',
+                textTransform: 'capitalize',
+                marginLeft: 6
+              }}>{b.status}</span></div>
               <div><strong>Date:</strong> {new Date(b.date).toLocaleString()}</div>
               <div style={{ marginTop: 10, display: 'flex', gap: 18 }}>
                 <span style={{ color: '#e74c3c', cursor: 'pointer', fontWeight: 600 }} onClick={() => handleDelete(b._id)}>
@@ -138,7 +148,6 @@ const MyBookings = () => {
               <option value="Raffu">Raffu</option>
               <option value="Other">Other</option>
             </select>
-            <input type="text" name="status" value={editBooking.status} onChange={handleEditChange} placeholder="Status" style={{ width: '100%', marginBottom: 10, padding: 8 }} />
             <textarea name="notes" value={editBooking.notes} onChange={handleEditChange} placeholder="Notes" rows={3} style={{ width: '100%', marginBottom: 10, padding: 8 }} />
             <button type="submit" className="btn book-btn animated-btn" style={{ width: '100%' }} disabled={editLoading}>
               {editLoading ? 'Saving...' : 'Save Changes'}

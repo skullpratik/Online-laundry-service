@@ -29,6 +29,21 @@ const AdminDashboard = () => {
       });
   }, [navigate]);
 
+  const handleStatusChange = async (id, newStatus) => {
+    try {
+      const res = await fetch(`/api/bookings/status/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (!res.ok) throw new Error('Failed to update status');
+      const updated = await res.json();
+      setBookings(bookings.map(b => b._id === updated._id ? updated : b));
+    } catch (err) {
+      alert('Error: ' + err.message);
+    }
+  };
+
   if (loading) return <div style={{ padding: 40 }}>Loading bookings...</div>;
   if (error) return <div style={{ color: 'red', padding: 40 }}>{error}</div>;
 
@@ -52,7 +67,36 @@ const AdminDashboard = () => {
               <td style={{ border: '1px solid #ccc', padding: 8 }}>{b.name}</td>
               <td style={{ border: '1px solid #ccc', padding: 8 }}>{b.phone}</td>
               <td style={{ border: '1px solid #ccc', padding: 8 }}>{b.serviceType}</td>
-              <td style={{ border: '1px solid #ccc', padding: 8 }}>{b.status}</td>
+              <td style={{ border: '1px solid #ccc', padding: 8 }}>
+                <span style={{
+                  display: 'inline-block',
+                  padding: '2px 12px',
+                  borderRadius: 12,
+                  background: b.status === 'delivered' ? '#16a085' : b.status === 'on the way' ? '#f6c90e' : b.status === 'processed' ? '#f98d3a' : b.status === 'accepted' ? '#0077b6' : '#e74c3c',
+                  color: '#fff',
+                  fontWeight: 600,
+                  fontSize: '0.98rem',
+                  textTransform: 'capitalize',
+                  marginRight: 8
+                }}>{b.status}</span>
+                <select
+                  value={b.status}
+                  onChange={e => handleStatusChange(b._id, e.target.value)}
+                  style={{
+                    padding: '4px 8px',
+                    borderRadius: 8,
+                    border: '1px solid #ccc',
+                    fontSize: '0.98rem',
+                    marginLeft: 4
+                  }}
+                >
+                  <option value="pending">Pending</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="processed">Processed</option>
+                  <option value="on the way">On the Way</option>
+                  <option value="delivered">Delivered</option>
+                </select>
+              </td>
               <td style={{ border: '1px solid #ccc', padding: 8 }}>{new Date(b.date).toLocaleString()}</td>
             </tr>
           ))}

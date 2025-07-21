@@ -80,4 +80,20 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+// Admin: Update booking status by ID
+router.patch('/status/:id', async (req, res) => {
+  try {
+    const { status } = req.body;
+    const updated = await Booking.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true, runValidators: true }
+    );
+    if (!updated) return res.status(404).json({ error: 'Booking not found' });
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router; 
