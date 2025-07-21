@@ -62,4 +62,14 @@ router.post('/admin-login', async (req, res) => {
   }
 });
 
+// Hardcoded admin login route
+router.post('/hardcoded-admin-login', (req, res) => {
+  const { email, password } = req.body;
+  if (email === 'admin@example.com' && password === '9819') {
+    return res.json({ message: 'Admin login successful' });
+  } else {
+    return res.status(401).json({ message: 'Invalid admin credentials' });
+  }
+});
+
 module.exports = router; 

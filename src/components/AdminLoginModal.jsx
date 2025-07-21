@@ -19,7 +19,7 @@ const AdminLoginModal = ({ open, onClose }) => {
     setError('');
     setLoading(true);
     try {
-      const response = await fetch('/api/auth/admin-login', {
+      const response = await fetch('/api/auth/hardcoded-admin-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: form.email, password: form.password }),
