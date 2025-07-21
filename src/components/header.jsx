@@ -13,6 +13,7 @@ const Header = () => {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const [adminModalOpen, setAdminModalOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const getFirstName = (nameOrEmailOrPhone) => {
     if (!nameOrEmailOrPhone) return '';
@@ -37,6 +38,9 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [dropdownOpen]);
 
+  // Close menu on navigation (optional, improves UX)
+  const handleNavClick = () => setMenuOpen(false);
+
   return (
     <header className="header">
       <div className="header-content">
@@ -47,17 +51,17 @@ const Header = () => {
         </Link>
 
         {/* Hamburger icon */}
-        <div className="menu-toggle" onClick={() => setShowModal(false)}>
+        <div className="menu-toggle" onClick={() => setMenuOpen((open) => !open)}>
           ☰
         </div>
 
         {/* Nav + Buttons */}
-        <div className={`menu-content`}>
+        <div className={`menu-content${menuOpen ? ' open' : ''}`}>
           <nav className="nav-links">
-            <Link to="/" onClick={() => setShowModal(false)}>Home</Link>
-            <Link to="/services" onClick={() => setShowModal(false)}>Services</Link>
-            <Link to="/pricing" onClick={() => setShowModal(false)}>Pricing</Link>
-            <Link to="/about" onClick={() => setShowModal(false)}>About</Link>
+            <Link to="/" onClick={handleNavClick}>Home</Link>
+            <Link to="/services" onClick={handleNavClick}>Services</Link>
+            <Link to="/pricing" onClick={handleNavClick}>Pricing</Link>
+            <Link to="/about" onClick={handleNavClick}>About</Link>
           </nav>
           <div className="login-buttons">
             <button className="btn admin" style={{ background: '#29307a', color: '#fff' }} onClick={() => setAdminModalOpen(true)}>
