@@ -4,7 +4,7 @@ const ADMIN_ID = 'admin';
 const ADMIN_PASS = '9819';
 
 const AdminLoginModal = ({ open, onClose }) => {
-  const [form, setForm] = useState({ id: '', password: '' });
+  const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +22,7 @@ const AdminLoginModal = ({ open, onClose }) => {
       const response = await fetch('/api/auth/admin-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: form.id, password: form.password }),
+        body: JSON.stringify({ email: form.email, password: form.password }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -65,10 +65,10 @@ const AdminLoginModal = ({ open, onClose }) => {
         <h2 style={{ marginBottom: 16 }}>Admin Login</h2>
         <form onSubmit={handleSubmit}>
           <input
-            type="text"
-            name="id"
-            placeholder="Admin ID"
-            value={form.id}
+            type="email"
+            name="email"
+            placeholder="Admin Email"
+            value={form.email}
             onChange={handleChange}
             style={{ width: '100%', marginBottom: 10, padding: 8 }}
             required
