@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Backend ignores
+backend/node_modules/
+backend/.env
+backend/*.log

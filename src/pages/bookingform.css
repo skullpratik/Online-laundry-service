@@ -2,41 +2,52 @@
   max-width: 600px;
   margin: 80px auto;
   padding: 40px;
-  background: #f9f9ff;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #e0f7fa 0%, #f9f9ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 10px 32px rgba(0, 183, 255, 0.10);
   font-family: 'Segoe UI', sans-serif;
+  animation: fadeInBooking 1.1s cubic-bezier(.4,1.4,.6,1) both;
+}
+@keyframes fadeInBooking {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .booking-form-container h2 {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 28px;
   color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-shadow: 0 4px 24px rgba(44,62,80,0.08);
 }
 
 .booking-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
 }
 
 .booking-form label {
-  font-size: 1rem;
+  font-size: 1.08rem;
   color: #37474f;
-  font-weight: 500;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 .booking-form input,
 .booking-form select,
 .booking-form textarea {
-  padding: 12px 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+  padding: 14px 16px;
+  border: 1.5px solid #a1c4fd;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(161,196,253,0.07);
 }
 
 .booking-form input:focus,
@@ -44,7 +55,8 @@
 .booking-form textarea:focus {
   outline: none;
   border-color: #4ca1af;
-  background-color: #fff;
+  background-color: #f9f9ff;
+  box-shadow: 0 4px 16px rgba(76,161,175,0.10);
 }
 
 .booking-form textarea {
@@ -53,24 +65,67 @@
 }
 
 .btn.book-btn {
-  background: linear-gradient(to right, #1abc9c, #16a085);
+  background: linear-gradient(90deg, #1abc9c 0%, #16a085 100%);
   color: #fff;
   border: none;
-  font-size: 1rem;
-  padding: 12px;
-  border-radius: 8px;
+  font-size: 1.13rem;
+  padding: 16px 0;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  font-weight: 700;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.10);
+  letter-spacing: 1px;
 }
 
 .btn.book-btn:hover {
-  background: linear-gradient(to right, #16a085, #1abc9c);
-  transform: scale(1.02);
+  background: linear-gradient(90deg, #16a085 0%, #1abc9c 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.13);
 }
 
 .error {
   color: #e53935;
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   margin-top: -8px;
   margin-bottom: 4px;
+}
+
+.animated-btn {
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+.animated-btn:hover {
+  background: linear-gradient(90deg, #1abc9c 60%, #16a085 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.13);
+}
+.animated-btn:active {
+  transform: scale(0.98);
+}
+.animated-card {
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.animated-card:hover {
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.16);
+  transform: translateY(-4px) scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .booking-form-container {
+    padding: 18px 4px;
+    border-radius: 10px;
+    margin: 40px 0;
+  }
+  .booking-form-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 18px;
+  }
+  .btn.book-btn {
+    width: 90vw;
+    max-width: 340px;
+    font-size: 1.01rem;
+    padding: 12px 0;
+    border-radius: 8px;
+  }
 }

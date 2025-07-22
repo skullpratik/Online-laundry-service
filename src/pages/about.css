@@ -1,8 +1,8 @@
 .about-wrapper {
-  padding: 60px 20px;
+  padding: 60px 10px;
   font-family: 'Segoe UI', sans-serif;
   color: #2c3e50;
-  background: #f9fcff;
+  background: linear-gradient(135deg, #e0f7fa 0%, #f9f9ff 60%, #a1c4fd 100%);
   line-height: 1.7;
 }
 
@@ -12,32 +12,37 @@
 }
 
 .about-hero h1 {
-  font-size: 3rem;
+  font-size: 3.2rem;
   color: #1a3d5d;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-shadow: 0 4px 24px rgba(26,61,93,0.08);
 }
 
 .about-hero p {
-  font-size: 1.2rem;
+  font-size: 1.22rem;
   color: #4a6b82;
   max-width: 700px;
   margin: 0 auto;
+  line-height: 1.7;
 }
 
 .about-section {
   max-width: 900px;
   margin: 30px auto;
-  background: #ffffff;
-  border-left: 6px solid #4ca1af;
-  padding: 25px 30px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  border-radius: 10px;
+  background: linear-gradient(120deg, #fff 60%, #e0f7fa 100%);
+  border-left: 8px solid #4ca1af;
+  padding: 32px 30px;
+  box-shadow: 0 8px 32px rgba(76,161,175,0.08);
+  border-radius: 18px;
 }
 
 .about-section h2 {
   color: #293241;
-  margin-bottom: 15px;
-  font-size: 1.6rem;
+  margin-bottom: 18px;
+  font-size: 1.7rem;
+  font-weight: 700;
 }
 
 .about-section ul {
@@ -46,27 +51,31 @@
 }
 
 .about-section ul li {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   position: relative;
-  padding-left: 25px;
+  padding-left: 28px;
+  font-size: 1.08rem;
 }
 
 .about-section ul li::before {
-  content: '✔️';
+  content: '\2714\fe0f';
   position: absolute;
   left: 0;
   top: 0;
+  color: #1abc9c;
+  font-size: 1.1rem;
 }
 
 .about-contact {
   max-width: 700px;
   margin: 50px auto 0;
   text-align: center;
-  font-size: 1.1rem;
-  background: #e8f6f9;
-  padding: 30px;
-  border-radius: 10px;
+  font-size: 1.13rem;
+  background: linear-gradient(90deg, #e8f6f9 60%, #f9f9ff 100%);
+  padding: 32px;
+  border-radius: 14px;
   color: #2c3e50;
+  box-shadow: 0 8px 24px rgba(76,161,175,0.08);
 }
 
 .about-contact a {
@@ -83,12 +92,13 @@
   .about-hero h1 {
     font-size: 2.2rem;
   }
-
   .about-section {
-    padding: 20px;
+    padding: 18px;
+    border-radius: 10px;
   }
-
   .about-contact {
-    font-size: 1rem;
+    font-size: 1.01rem;
+    padding: 16px;
+    border-radius: 8px;
   }
 }

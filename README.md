@@ -1,3 +1,7 @@
+# Laundry Project Frontend
+
+**Note:** This folder contains only the frontend code. The backend should be placed in a separate `backend/` folder or repository for deployment on platforms like Railway, Render, or Vercel.
+
 # 🧺 Laundry Booking Web App – MERN Stack
 An end-to-end Laundry Booking Application built with the MERN stack with user login, service bookings, review system, and admin control panel.
 
@@ -47,3 +51,5 @@ An end-to-end Laundry Booking Application built with the MERN stack with user lo
 ```bash
 git clone https://github.com/skullpratik/Online-laundry-service.git
 cd laundry-project
+
+```
