@@ -107,7 +107,7 @@ const Header = () => {
             <div style={{ display: 'flex', alignItems: 'center', fontWeight: 600, color: '#222', fontSize: '1rem', gap: 8, position: 'relative', width: '100%', padding: '8px 0', borderBottom: '1px solid #eee' }}>
               <FaUserCircle size={28} style={{ marginRight: 6 }} />
               {isAdmin ? (
-                <div ref={adminDropdownRef}>
+                <div ref={adminDropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <button
                     className="user-menu-btn"
                     onClick={() => setAdminDropdownOpen((open) => !open)}
@@ -124,6 +124,24 @@ const Header = () => {
                     }}
                   >
                     Admin
+                  </button>
+                  <button
+                    className="user-menu-btn"
+                    title="View Dashboard"
+                    onClick={() => navigate('/admin-dashboard')}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      color: '#16a085',
+                      fontSize: '1.2rem',
+                      marginLeft: 2
+                    }}
+                  >
+                    <FaClipboardList size={22} style={{ marginRight: 2 }} />
+                    <span style={{ fontSize: '1rem', fontWeight: 500 }}>View Dashboard</span>
                   </button>
                   {adminDropdownOpen && (
                     <div

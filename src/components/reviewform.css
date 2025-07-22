@@ -44,3 +44,25 @@
 .review-form button:hover {
   background: #0056b3;
 }
+
+@media (max-width: 600px) {
+  .review-form-section {
+    padding: 24px 4px;
+  }
+  .review-form {
+    max-width: 100%;
+    padding: 0 2vw;
+  }
+  .review-form input,
+  .review-form textarea {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 10px;
+    box-sizing: border-box;
+  }
+  .review-form button {
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 14px 0;
+  }
+}
