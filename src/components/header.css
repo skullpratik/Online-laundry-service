@@ -7,6 +7,8 @@
   box-shadow: 0 2px 16px rgba(44, 62, 80, 0.07);
   z-index: 100;
   transition: box-shadow 0.3s;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 .header-content {
   max-width: 1200px;
@@ -14,7 +16,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 32px 12px 32px;
+  padding: 18px 32px 0 32px;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 .logo-box {
   display: flex;
@@ -49,15 +53,19 @@
   text-decoration: none;
   font-weight: 500;
   font-size: 1.05rem;
-  transition: color 0.2s;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 6px;
+  padding: 6px 12px;
 }
 .nav-links a:hover {
   color: #16a085;
+  background: #e0f7fa;
 }
 .login-buttons {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: 18px;
 }
 .btn.customer, .btn.admin {
   background: linear-gradient(90deg, #16a085 60%, #1abc9c 100%);
@@ -214,14 +222,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
     z-index: 120;
     background: none;
     border: none;
     position: static;
-    margin-left: 16px;
+    margin-left: auto;
+    margin-right: 0;
     box-shadow: none;
   }
 }
@@ -246,4 +255,58 @@
 }
 .menu-toggle.open .bar3 {
   transform: rotate(-45deg) translate(6px, -6px);
+}
+.header-user-row {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #222;
+  font-size: 1rem;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+.header-user-icon {
+  margin-right: 6px;
+}
+.header-admin-dropdown-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.view-dashboard-btn {
+  color: #16a085;
+  font-size: 1.2rem;
+  margin-left: 2px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0;
+}
+.header-dashboard-icon {
+  margin-right: 2px;
+}
+.header-dashboard-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.header-user-dropdown-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+.view-booking-link {
+  color: #16a085;
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: 4px;
+  cursor: pointer;
+  white-space: nowrap;
 }
