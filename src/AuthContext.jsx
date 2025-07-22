@@ -2,14 +2,38 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
+function decodeJwt(token) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  } catch {
+    return null;
+  }
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem('token') || '');
 
   useEffect(() => {
     if (token) {
-      // Optionally, decode token to get user info or fetch user profile
-      setUser(JSON.parse(localStorage.getItem('user')));
+      let storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      } else {
+        // Try to decode user info from token if user is missing
+        const decoded = decodeJwt(token);
+        if (decoded && decoded.userId) {
+          // You can add more fields if needed
+          setUser({ _id: decoded.userId, role: decoded.role });
+        } else {
+          setUser(null);
+        }
+      }
     } else {
       setUser(null);
     }

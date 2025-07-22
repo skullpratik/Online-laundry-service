@@ -1,25 +1,40 @@
 import './testimonial.css';
-
-const testimonials = [
-  { text: "Clothes come back so fresh!", name: "- Ramesh P." },
-  { text: "Affordable, professional service!", name: "- Neha S." },
-  { text: "Eco-friendly and fast!", name: "- Ankit M." },
-  { text: "Pickup and delivery is amazing!", name: "- Priya D." },
-  { text: "Highly recommended!", name: "- Aryan J." },
-];
+import { useEffect, useState } from 'react';
 
 const TestimonialSlider = () => {
+  const [testimonials, setTestimonials] = useState([]);
+
+  useEffect(() => {
+    async function fetchReviews() {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/reviews`);
+        if (!res.ok) throw new Error('Failed to fetch reviews');
+        const data = await res.json();
+        setTestimonials(data);
+      } catch {
+        setTestimonials([]);
+      }
+    }
+    fetchReviews();
+  }, []);
+
   return (
     <section className="testimonial-section">
       <h2 className="testimonial-title">What Our Customers Say</h2>
       <div className="testimonial-slider-wrapper">
         <div className="testimonial-slider">
-          {testimonials.map((item, index) => (
-            <div className="testimonial-card" key={index}>
-              <p>"{item.text}"</p>
-              <h4>{item.name}</h4>
+          {testimonials.length === 0 ? (
+            <div className="testimonial-card">
+              <p>No reviews yet. Be the first to leave a review!</p>
             </div>
-          ))}
+          ) : (
+            testimonials.map((item, index) => (
+              <div className="testimonial-card" key={index}>
+                <p>"{item.text}"</p>
+                <h4>{item.name}</h4>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </section>
