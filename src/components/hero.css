@@ -1,7 +1,7 @@
 /* Hero.css */
 .hero {
   background: linear-gradient(135deg, #f9f9ff 0%, #e0f7fa 60%, #a1c4fd 100%);
-  padding: 90px 10px 70px 10px;
+  padding: 0 10px 70px 10px;
   font-family: 'Inter', 'Segoe UI', serif;
   min-height: 70vh;
   position: relative;
@@ -14,12 +14,13 @@
 }
 .hero-content {
   max-width: 1200px;
-  margin: auto;
+  margin: 32px auto 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   min-height: 60vh;
+  padding-top: 0;
 }
 .hero-text {
   flex: 1;

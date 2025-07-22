@@ -99,9 +99,9 @@ const Header = () => {
           <img src="/logo.jpg" alt="Logo" className="logo-img" />
           <span className="logo-text">SKLdrycleaner's</span>
         </Link>
-
         {/* Nav + Buttons */}
-        <div ref={menuContentRef} className={`menu-content${menuOpen ? ' open' : ''}`} style={{ maxWidth: 340, width: '100%', right: 0, left: 'auto' }}>
+        <div ref={menuContentRef} className={`menu-content${menuOpen ? ' open' : ''}`}
+          style={{ maxWidth: '100vw', width: '100vw', right: 0, left: 0 }}>
           {/* User/Admin dropdown at top of menu on mobile */}
           {(isAdmin || user) && (
             <div style={{ display: 'flex', alignItems: 'center', fontWeight: 600, color: '#222', fontSize: '1rem', gap: 8, position: 'relative', width: '100%', padding: '8px 0', borderBottom: '1px solid #eee' }}>
@@ -273,7 +273,6 @@ const Header = () => {
             <Link to="/about" onClick={handleNavClick}>About</Link>
           </nav>
         </div>
-
         {/* Hamburger icon on the right with animated bars */}
         <div
           className={`menu-toggle${menuOpen ? ' open' : ''}`}
