@@ -182,7 +182,7 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <div ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
                   <button
                     className="user-menu-btn"
                     onClick={() => setDropdownOpen((open) => !open)}
@@ -200,24 +200,21 @@ const Header = () => {
                   >
                     {getDisplayName()}
                   </button>
-                  <button
-                    className="user-menu-btn"
-                    title="View Booking"
+                  {/* Always show View Booking text link to the right of user name */}
+                  <span
                     onClick={() => navigate('/my-bookings')}
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
                       color: '#16a085',
-                      fontSize: '1.2rem',
-                      marginLeft: 2
+                      textDecoration: 'underline',
+                      fontWeight: 500,
+                      fontSize: '1rem',
+                      marginLeft: 8,
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap'
                     }}
                   >
-                    <FaClipboardList size={22} style={{ marginRight: 2 }} />
-                    <span style={{ fontSize: '1rem', fontWeight: 500 }}>View Booking</span>
-                  </button>
+                    View Booking
+                  </span>
                   {dropdownOpen && (
                     <div
                       className="user-dropdown"
