@@ -17,7 +17,7 @@ const ReviewForm = () => {
     setSuccess('');
     setError('');
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/review`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/review`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: form.name, email: form.email, text: form.review })

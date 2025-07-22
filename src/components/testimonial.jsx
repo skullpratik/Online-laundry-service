@@ -7,7 +7,7 @@ const TestimonialSlider = () => {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/reviews`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/reviews`);
         if (!res.ok) throw new Error('Failed to fetch reviews');
         const data = await res.json();
         setTestimonials(data);
