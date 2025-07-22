@@ -53,3 +53,18 @@ git clone https://github.com/skullpratik/Online-laundry-service.git
 cd laundry-project
 
 ```
+
+## Environment Variables
+
+To connect your frontend to your backend API, set the following environment variable in your Vercel project settings:
+
+```
+VITE_API_URL=https://laundry-backend-4.onrender.com/api
+```
+
+This will ensure all API requests from the frontend are sent to your deployed backend.
+
+If you are running locally, you can create a `.env` file in the `laundry-project` directory with:
+```
+VITE_API_URL=http://localhost:5000/api
+```
