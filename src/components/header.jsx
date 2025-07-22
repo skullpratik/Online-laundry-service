@@ -77,10 +77,15 @@ const Header = () => {
     }
     if (menuOpen) {
       document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
     } else {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
     }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
   }, [menuOpen]);
 
   // Close menu on navigation (optional, improves UX)
@@ -95,13 +100,8 @@ const Header = () => {
           <span className="logo-text">SKLdrycleaner's</span>
         </Link>
 
-        {/* Hamburger icon */}
-        <div className="menu-toggle" onClick={() => setMenuOpen((open) => !open)}>
-          ☰
-        </div>
-
         {/* Nav + Buttons */}
-        <div ref={menuContentRef} className={`menu-content${menuOpen ? ' open' : ''}`}>
+        <div ref={menuContentRef} className={`menu-content${menuOpen ? ' open' : ''}`} style={{ maxWidth: 340, width: '100%', right: 0, left: 'auto' }}>
           {/* User/Admin dropdown at top of menu on mobile */}
           {(isAdmin || user) && (
             <div style={{ display: 'flex', alignItems: 'center', fontWeight: 600, color: '#222', fontSize: '1rem', gap: 8, position: 'relative', width: '100%', padding: '8px 0', borderBottom: '1px solid #eee' }}>
@@ -182,7 +182,7 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <div ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
+                <div ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
                   <button
                     className="user-menu-btn"
                     onClick={() => setDropdownOpen((open) => !open)}
@@ -200,7 +200,7 @@ const Header = () => {
                   >
                     {getDisplayName()}
                   </button>
-                  {/* Always show View Booking text link to the right of user name */}
+                  {/* View Booking text closer to user name */}
                   <span
                     onClick={() => navigate('/my-bookings')}
                     style={{
@@ -208,7 +208,7 @@ const Header = () => {
                       textDecoration: 'underline',
                       fontWeight: 500,
                       fontSize: '1rem',
-                      marginLeft: 8,
+                      marginLeft: 4,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap'
                     }}
@@ -272,6 +272,17 @@ const Header = () => {
             <Link to="/pricing" onClick={handleNavClick}>Pricing</Link>
             <Link to="/about" onClick={handleNavClick}>About</Link>
           </nav>
+        </div>
+
+        {/* Hamburger icon on the right with animated bars */}
+        <div
+          className={`menu-toggle${menuOpen ? ' open' : ''}`}
+          onClick={() => setMenuOpen((open) => !open)}
+          style={{ marginLeft: 'auto', marginRight: 0 }}
+        >
+          <span className="bar1"></span>
+          <span className="bar2"></span>
+          <span className="bar3"></span>
         </div>
       </div>
       <SignInModal open={showModal} onClose={() => setShowModal(false)} />
