@@ -14,7 +14,7 @@ const AdminDashboard = () => {
       return;
     }
     setLoading(true);
-    fetch('/api/bookings')
+    fetch(`${import.meta.env.VITE_API_URL}/api/bookings`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch bookings');
         return res.json();
@@ -31,7 +31,7 @@ const AdminDashboard = () => {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      const res = await fetch(`/api/bookings/status/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/status/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })

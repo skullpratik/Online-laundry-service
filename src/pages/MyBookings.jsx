@@ -17,7 +17,7 @@ const MyBookings = () => {
   useEffect(() => {
     if (!token) return;
     setLoading(true);
-    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/bookings/my`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/bookings/my`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
@@ -37,7 +37,7 @@ const MyBookings = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this booking?')) return;
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/bookings/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -61,7 +61,7 @@ const MyBookings = () => {
     e.preventDefault();
     setEditLoading(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/bookings/${editBooking._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/${editBooking._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

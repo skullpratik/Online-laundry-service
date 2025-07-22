@@ -41,7 +41,7 @@ const BookingForm = () => {
     const payload = { ...data, clothCount: Number(data.clothCount) };
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/bookings`,
+        `${import.meta.env.VITE_API_URL}/api/bookings`,
         {
           method: 'POST',
           headers: {
