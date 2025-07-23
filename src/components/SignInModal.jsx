@@ -36,6 +36,11 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
         setLoading(false);
         return;
       }
+      if (!/^\d{10}$/.test(form.phone)) {
+        setError('Phone number must be exactly 10 digits.');
+        setLoading(false);
+        return;
+      }
       if (!form.name.trim()) {
         setError('Name is required.');
         setLoading(false);
@@ -43,11 +48,6 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
       }
       if (/\d/.test(form.name)) {
         setError('Name cannot contain numbers.');
-        setLoading(false);
-        return;
-      }
-      if (/[^0-9]/.test(form.phone)) {
-        setError('Phone number must contain only digits.');
         setLoading(false);
         return;
       }
@@ -63,6 +63,11 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
         setLoading(false);
         return;
       }
+      if (!/^\d{10}$/.test(form.phone)) {
+        setError('Phone number must be exactly 10 digits.');
+        setLoading(false);
+        return;
+      }
       if (!form.name.trim()) {
         setError('Name is required.');
         setLoading(false);
@@ -70,11 +75,6 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
       }
       if (/\d/.test(form.name)) {
         setError('Name cannot contain numbers.');
-        setLoading(false);
-        return;
-      }
-      if (/[^0-9]/.test(form.phone)) {
-        setError('Phone number must contain only digits.');
         setLoading(false);
         return;
       }
@@ -87,7 +87,10 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
     setLoading(true);
     try {
       if (isRegister) {
-        await register(form);
+        // Only send name, email (optional), password for backend, but keep phone for frontend validation
+        const regPayload = { name: form.name, password: form.password };
+        if (form.email) regPayload.email = form.email;
+        await register(regPayload);
         setIsRegister(false);
         setSuccess('Registration successful! Please log in.');
       } else {
@@ -118,7 +121,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
               <input
                 type="text"
                 name="phone"
-                placeholder="Phone (required)"
+                placeholder="Phone (required, 10 digits)"
                 value={form.phone}
                 onChange={handleChange}
                 className="modal-input"
@@ -162,7 +165,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
               <input
                 type="text"
                 name="phone"
-                placeholder="Phone (required)"
+                placeholder="Phone (required, 10 digits)"
                 value={form.phone}
                 onChange={handleChange}
                 className="modal-input"
