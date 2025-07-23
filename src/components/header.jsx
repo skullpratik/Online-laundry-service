@@ -132,7 +132,12 @@ const Header = () => {
                     <div className="user-dropdown">
                       <button
                         className="user-dropdown-item"
-                        onClick={logout}
+                        onClick={() => {
+                          logout();
+                          setDropdownOpen(false);
+                          setMenuOpen(false);
+                          navigate('/');
+                        }}
                       >
                         Logout
                       </button>
@@ -207,7 +212,12 @@ const Header = () => {
                     <div className="user-dropdown">
                       <button
                         className="user-dropdown-item"
-                        onClick={logout}
+                        onClick={() => {
+                          logout();
+                          setDropdownOpen(false);
+                          setMenuOpen(false);
+                          navigate('/');
+                        }}
                       >
                         Logout
                       </button>
