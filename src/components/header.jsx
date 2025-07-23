@@ -116,20 +116,25 @@ const Header = () => {
                 </div>
               ) : (
                 <div className="header-user-dropdown-row">
-                  <div style={{ position: 'relative' }} ref={dropdownRef}>
+                  <div style={{ position: 'relative' }}>
                     <button
                       className="user-menu-btn"
-                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      onClick={() => setDropdownOpen((open) => !open)}
                     >
                       {getDisplayName()}
                     </button>
                     {dropdownOpen && (
-                      <div className="user-dropdown" onClick={() => {
-                        logout();
-                        setDropdownOpen(false);
-                        navigate('/');
-                      }}>
-                        <button className="user-dropdown-item">Logout</button>
+                      <div className="user-dropdown" style={{zIndex: 9999}}>
+                        <button
+                          className="user-dropdown-item"
+                          onClick={() => {
+                            logout();
+                            setDropdownOpen(false);
+                            navigate('/');
+                          }}
+                        >
+                          Logout
+                        </button>
                       </div>
                     )}
                   </div>
@@ -192,20 +197,25 @@ const Header = () => {
                 </div>
               ) : (
                 <div className="header-user-dropdown-row">
-                  <div style={{ position: 'relative' }} ref={dropdownRef}>
+                  <div style={{ position: 'relative' }}>
                     <button
                       className="user-menu-btn"
-                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      onClick={() => setDropdownOpen((open) => !open)}
                     >
                       {getDisplayName()}
                     </button>
                     {dropdownOpen && (
-                      <div className="user-dropdown" onClick={() => {
-                        logout();
-                        setDropdownOpen(false);
-                        navigate('/');
-                      }}>
-                        <button className="user-dropdown-item">Logout</button>
+                      <div className="user-dropdown" style={{zIndex: 9999}}>
+                        <button
+                          className="user-dropdown-item"
+                          onClick={() => {
+                            logout();
+                            setDropdownOpen(false);
+                            navigate('/');
+                          }}
+                        >
+                          Logout
+                        </button>
                       </div>
                     )}
                   </div>
