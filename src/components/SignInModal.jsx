@@ -117,7 +117,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
             <>
               <input
                 type="text"
-                name="login_phone"
+                name="phone"
                 placeholder="Phone (required)"
                 value={form.phone}
                 onChange={handleChange}
@@ -127,7 +127,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
               />
               <input
                 type="text"
-                name="login_name"
+                name="name"
                 placeholder="Name (required)"
                 value={form.name}
                 onChange={handleChange}
@@ -137,7 +137,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
               />
               <input
                 type="text"
-                name="login_email"
+                name="email"
                 placeholder="Email (optional)"
                 value={form.email}
                 onChange={handleChange}
@@ -146,7 +146,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
               />
               <input
                 type="password"
-                name="login_password"
+                name="password"
                 placeholder="Password (min 6 characters)"
                 value={form.password}
                 onChange={handleChange}
@@ -161,7 +161,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
             <>
               <input
                 type="text"
-                name="login_phone"
+                name="phone"
                 placeholder="Phone (required)"
                 value={form.phone}
                 onChange={handleChange}
@@ -171,7 +171,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
               />
               <input
                 type="text"
-                name="login_name"
+                name="name"
                 placeholder="Name (required)"
                 value={form.name}
                 onChange={handleChange}
@@ -181,7 +181,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
               />
               <input
                 type="password"
-                name="login_password"
+                name="password"
                 placeholder="Password (min 6 characters)"
                 value={form.password}
                 onChange={handleChange}

@@ -8,10 +8,15 @@ const AdminLogin = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Email: ${form.email}\nPassword: ${form.password}`);
+  };
+
   return (
     <div className="login-container">
       <h2>Admin Login</h2>
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <input
           type="email"
           name="email"

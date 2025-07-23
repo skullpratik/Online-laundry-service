@@ -8,11 +8,16 @@ const CustomerLogin = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Email/Phone: ${form.email}\nPassword: ${form.password}`);
+  };
+
   return (
     <div className="login-container">
       <h2>Customer Login</h2>
       <p className="login-note">Note: This login is only for regular customers with registered accounts.</p>
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <input
           type="text"
           name="email"
