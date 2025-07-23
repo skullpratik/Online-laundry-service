@@ -133,6 +133,7 @@ const Header = () => {
                       <button
                         className="user-dropdown-item"
                         onClick={() => {
+                          console.log('User logout clicked');
                           logout();
                           setDropdownOpen(false);
                           navigate('/');
@@ -212,6 +213,7 @@ const Header = () => {
                       <button
                         className="user-dropdown-item"
                         onClick={() => {
+                          console.log('User logout clicked');
                           logout();
                           setDropdownOpen(false);
                           setMenuOpen(false);
