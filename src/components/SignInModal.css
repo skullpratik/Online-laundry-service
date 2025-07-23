@@ -1,82 +1,3 @@
-/* ReviewForm.css */
-.review-form-section {
-  background: #f9f9f9;
-  padding: 60px 20px;
-  text-align: center;
-  font-family: 'Times New Roman', serif;
-}
-.review-form-section h2 {
-  font-size: 2.2rem;
-  margin-bottom: 30px;
-  color: #222;
-}
-.review-form {
-  max-width: 600px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.review-form input,
-.review-form textarea {
-  padding: 12px 15px;
-  font-size: 1rem;
-  font-family: inherit;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  transition: border-color .3s;
-}
-.review-form input:focus,
-.review-form textarea:focus {
-  border-color: #007bff;
-  outline: none;
-}
-.review-form button {
-  padding: 12px;
-  background: #007bff;
-  color: #fff;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background .3s;
-}
-.review-form button:hover {
-  background: #0056b3;
-}
-.review-success {
-  color: green;
-  margin-top: 8px;
-}
-.review-error {
-  color: red;
-  margin-top: 8px;
-}
-
-@media (max-width: 768px) {
-  .review-form-section {
-    padding: 24px 4px;
-  }
-  .review-form {
-    max-width: 100%;
-    padding: 0 2vw;
-    gap: 10px;
-  }
-  .review-form input,
-  .review-form textarea {
-    width: 100%;
-    font-size: 1rem;
-    padding: 12px 10px;
-    box-sizing: border-box;
-  }
-  .review-form button {
-    width: 100%;
-    font-size: 1.05rem;
-    padding: 14px 0;
-    border-radius: 8px;
-  }
-}
-
 /* SignInModal.css */
 
 .modal-backdrop {
@@ -233,4 +154,4 @@
     font-size: 1rem;
     padding: 0.7rem 0;
   }
-}
+} 

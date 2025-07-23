@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useAuth } from '../AuthContext';
+import './SignInModal.css';
 
 const SignInModal = ({ open, onClose }) => {
   const { login, register } = useAuth();
   const [isRegister, setIsRegister] = useState(false);
   const [form, setForm] = useState({ email: '', phone: '', password: '', name: '' });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
   if (!open) return null;
@@ -17,12 +19,13 @@ const SignInModal = ({ open, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setLoading(true);
     try {
       if (isRegister) {
         await register(form);
         setIsRegister(false);
-        setError('Registration successful! Please log in.');
+        setSuccess('Registration successful! Please log in.');
       } else {
         await login(form);
         onClose();
@@ -35,36 +38,24 @@ const SignInModal = ({ open, onClose }) => {
   };
 
   return (
-    <div className="modal-backdrop" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-      <div className="modal" style={{ position: 'relative', background: '#fff', padding: 32, borderRadius: 12, minWidth: 320, maxWidth: 400 }}>
+    <div className="modal-backdrop">
+      <div className="modal">
         <button
           onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: 10,
-            right: 14,
-            background: 'none',
-            border: 'none',
-            fontSize: 32,
-            color: '#888',
-            cursor: 'pointer',
-            zIndex: 10,
-            lineHeight: 1,
-            fontWeight: 700
-          }}
+          className="modal-close"
           aria-label="Close sign in modal"
         >
           &times;
         </button>
-        <h2 style={{ marginBottom: 16 }}>{isRegister ? 'Register' : 'Sign In'}</h2>
-        <form onSubmit={handleSubmit}>
+        <h2 className="modal-title">{isRegister ? 'Register' : 'Sign In'}</h2>
+        <form onSubmit={handleSubmit} className="modal-form">
           <input
             type="text"
             name="email"
             placeholder="Email (optional)"
             value={form.email}
             onChange={handleChange}
-            style={{ width: '100%', marginBottom: 10, padding: 8 }}
+            className="modal-input"
           />
           <input
             type="text"
@@ -72,7 +63,7 @@ const SignInModal = ({ open, onClose }) => {
             placeholder="Phone (optional)"
             value={form.phone}
             onChange={handleChange}
-            style={{ width: '100%', marginBottom: 10, padding: 8 }}
+            className="modal-input"
           />
           {isRegister && (
             <input
@@ -81,7 +72,7 @@ const SignInModal = ({ open, onClose }) => {
               placeholder="Name (optional)"
               value={form.name}
               onChange={handleChange}
-              style={{ width: '100%', marginBottom: 10, padding: 8 }}
+              className="modal-input"
             />
           )}
           <input
@@ -90,16 +81,17 @@ const SignInModal = ({ open, onClose }) => {
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
-            style={{ width: '100%', marginBottom: 10, padding: 8 }}
+            className="modal-input"
             required
           />
-          {error && <div style={{ color: 'red', marginBottom: 10 }}>{error}</div>}
-          <button type="submit" style={{ width: '100%', padding: 10, background: '#16a085', color: '#fff', border: 'none', borderRadius: 6 }} disabled={loading}>
+          {error && <div className="modal-error">{error}</div>}
+          {success && <div className="modal-success">{success}</div>}
+          <button type="submit" className="modal-submit" disabled={loading}>
             {loading ? (isRegister ? 'Registering...' : 'Signing in...') : (isRegister ? 'Register' : 'Sign In')}
           </button>
         </form>
-        <div style={{ marginTop: 16, textAlign: 'center' }}>
-          <button onClick={() => setIsRegister(!isRegister)} style={{ background: 'none', border: 'none', color: '#0077b6', cursor: 'pointer' }}>
+        <div className="modal-switch">
+          <button onClick={() => { setIsRegister(!isRegister); setError(''); setSuccess(''); }} className="modal-switch-btn">
             {isRegister ? 'Already have an account? Sign In' : "Don't have an account? Register"}
           </button>
         </div>

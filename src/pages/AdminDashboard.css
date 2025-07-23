@@ -1,0 +1,123 @@
+/* AdminDashboard.css */
+
+.admin-dashboard-container {
+  padding: 40px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-dashboard-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.admin-dashboard-welcome {
+  text-align: center;
+  color: #555;
+  margin-bottom: 28px;
+  font-size: 1.08rem;
+}
+
+.admin-dashboard-table-wrapper {
+  overflow-x: auto;
+  background: #f9f9ff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.07);
+  padding: 12px 0 12px 0;
+}
+
+.admin-dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+  background: transparent;
+}
+
+.admin-dashboard-table th,
+.admin-dashboard-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.admin-dashboard-table th {
+  background: #e0f7fa;
+  color: #222;
+  font-weight: 700;
+}
+
+.admin-dashboard-table tr:nth-child(even) {
+  background: #f4fafd;
+}
+
+.admin-status-badge {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.98rem;
+  text-transform: capitalize;
+  margin-right: 8px;
+}
+.status-pending { background: #e74c3c; }
+.status-accepted { background: #0077b6; }
+.status-processed { background: #f98d3a; }
+.status-on-the-way { background: #f6c90e; color: #222; }
+.status-delivered { background: #16a085; }
+
+.admin-status-select {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.98rem;
+  margin-left: 4px;
+  background: #fff;
+}
+
+.admin-dashboard-loading,
+.admin-dashboard-error {
+  padding: 40px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+.admin-dashboard-error {
+  color: #e74c3c;
+}
+
+@media (max-width: 900px) {
+  .admin-dashboard-container {
+    padding: 18px 2px;
+  }
+  .admin-dashboard-table-wrapper {
+    padding: 4px 0 8px 0;
+  }
+  .admin-dashboard-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-dashboard-container {
+    padding: 8px 0;
+  }
+  .admin-dashboard-title {
+    font-size: 1.1rem;
+  }
+  .admin-dashboard-welcome {
+    font-size: 0.98rem;
+  }
+  .admin-dashboard-table th,
+  .admin-dashboard-table td {
+    font-size: 0.92rem;
+    padding: 7px 4px;
+  }
+  .admin-dashboard-table {
+    min-width: 520px;
+  }
+} 

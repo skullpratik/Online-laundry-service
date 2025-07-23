@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [bookings, setBookings] = useState([]);
@@ -44,64 +45,56 @@ const AdminDashboard = () => {
     }
   };
 
-  if (loading) return <div style={{ padding: 40 }}>Loading bookings...</div>;
-  if (error) return <div style={{ color: 'red', padding: 40 }}>{error}</div>;
+  if (loading) return <div className="admin-dashboard-loading">Loading bookings...</div>;
+  if (error) return <div className="admin-dashboard-error">{error}</div>;
 
   return (
-    <div style={{ padding: 40 }}>
-      <h2>Admin Dashboard</h2>
-      <p>Welcome, Admin! Here you can view all bookings and manage the system.</p>
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 24 }}>
-        <thead>
-          <tr>
-            <th style={{ border: '1px solid #ccc', padding: 8 }}>Name</th>
-            <th style={{ border: '1px solid #ccc', padding: 8 }}>Phone</th>
-            <th style={{ border: '1px solid #ccc', padding: 8 }}>Service</th>
-            <th style={{ border: '1px solid #ccc', padding: 8 }}>Status</th>
-            <th style={{ border: '1px solid #ccc', padding: 8 }}>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings.map(b => (
-            <tr key={b._id}>
-              <td style={{ border: '1px solid #ccc', padding: 8 }}>{b.name}</td>
-              <td style={{ border: '1px solid #ccc', padding: 8 }}>{b.phone}</td>
-              <td style={{ border: '1px solid #ccc', padding: 8 }}>{b.serviceType}</td>
-              <td style={{ border: '1px solid #ccc', padding: 8 }}>
-                <span style={{
-                  display: 'inline-block',
-                  padding: '2px 12px',
-                  borderRadius: 12,
-                  background: b.status === 'delivered' ? '#16a085' : b.status === 'on the way' ? '#f6c90e' : b.status === 'processed' ? '#f98d3a' : b.status === 'accepted' ? '#0077b6' : '#e74c3c',
-                  color: '#fff',
-                  fontWeight: 600,
-                  fontSize: '0.98rem',
-                  textTransform: 'capitalize',
-                  marginRight: 8
-                }}>{b.status}</span>
-                <select
-                  value={b.status}
-                  onChange={e => handleStatusChange(b._id, e.target.value)}
-                  style={{
-                    padding: '4px 8px',
-                    borderRadius: 8,
-                    border: '1px solid #ccc',
-                    fontSize: '0.98rem',
-                    marginLeft: 4
-                  }}
-                >
-                  <option value="pending">Pending</option>
-                  <option value="accepted">Accepted</option>
-                  <option value="processed">Processed</option>
-                  <option value="on the way">On the Way</option>
-                  <option value="delivered">Delivered</option>
-                </select>
-              </td>
-              <td style={{ border: '1px solid #ccc', padding: 8 }}>{new Date(b.date).toLocaleString()}</td>
+    <div className="admin-dashboard-container">
+      <h2 className="admin-dashboard-title">Admin Dashboard</h2>
+      <p className="admin-dashboard-welcome">Welcome, Admin! Here you can view all bookings and manage the system.</p>
+      <div className="admin-dashboard-table-wrapper">
+        <table className="admin-dashboard-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Cloth Count</th>
+              <th>Service</th>
+              <th>Notes</th>
+              <th>Status</th>
+              <th>Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {bookings.map(b => (
+              <tr key={b._id}>
+                <td>{b.name}</td>
+                <td>{b.phone}</td>
+                <td>{b.address}</td>
+                <td>{b.clothCount}</td>
+                <td>{b.serviceType}</td>
+                <td>{b.notes || '-'}</td>
+                <td>
+                  <span className={`admin-status-badge status-${b.status.replace(/\s/g, '-')}`}>{b.status}</span>
+                  <select
+                    value={b.status}
+                    onChange={e => handleStatusChange(b._id, e.target.value)}
+                    className="admin-status-select"
+                  >
+                    <option value="pending">Pending</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="processed">Processed</option>
+                    <option value="on the way">On the Way</option>
+                    <option value="delivered">Delivered</option>
+                  </select>
+                </td>
+                <td>{new Date(b.date).toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
