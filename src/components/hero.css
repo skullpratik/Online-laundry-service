@@ -1,6 +1,6 @@
 /* Hero.css */
 .hero {
-  background: linear-gradient(135deg, #f9f9ff 0%, #e0f7fa 60%, #a1c4fd 100%);
+  background: linear-gradient(135deg, #f6fafd 0%, #e0f7fa 60%, #48cae4 100%);
   padding: 0 10px 60px 10px;
   font-family: 'Inter', 'Segoe UI', serif;
   min-height: 100vh;
@@ -47,17 +47,17 @@
 }
 .hero-heading {
   font-size: 2.6rem;
-  color: #29307a;
+  color: #0077b6;
   margin-bottom: 20px;
   font-weight: 800;
   letter-spacing: 1.2px;
   line-height: 1.1;
-  text-shadow: 0 4px 24px rgba(41,48,122,0.08);
+  text-shadow: 0 4px 24px rgba(0,119,182,0.08);
   animation: fadeIn 1.3s;
 }
 .hero-description {
   font-size: 1.18rem;
-  color: #37474f;
+  color: #29307a;
   margin-bottom: 28px;
   animation: fadeIn 1.4s;
   line-height: 1.6;
@@ -70,7 +70,7 @@
   justify-content: flex-start;
 }
 .btn.book-now {
-  background: linear-gradient(90deg, #f98d3a 0%, #f6c90e 100%);
+  background: linear-gradient(90deg, #0077b6 0%, #48cae4 100%);
   color: #fff;
   font-weight: 700;
   border: none;
@@ -83,7 +83,7 @@
   letter-spacing: 1px;
 }
 .btn.book-now:hover {
-  background: linear-gradient(90deg, #f6c90e 0%, #f98d3a 100%);
+  background: linear-gradient(90deg, #48cae4 0%, #0077b6 100%);
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 12px 32px rgba(255, 111, 0, 0.18);
 }

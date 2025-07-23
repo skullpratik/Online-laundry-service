@@ -1,13 +1,17 @@
 :root {
-  --primary: #007bff;
-  --admin-dark: #333;
-  --dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --transition: 0.3s ease;
+  --primary: #0077b6;
+  --secondary: #48cae4;
+  --accent: #f5b041;
+  --background: #f6fafd;
+  --text: #222;
+  --admin-dark: #29307a;
+  --dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --transition: 0.3s cubic-bezier(.4,1.4,.6,1);
 }
 
 .header {
-  background: white;
-  border-bottom: 1px solid #ddd;
+  background: var(--background);
+  border-bottom: 1px solid #e0e7ef;
   position: sticky;
   top: 0;
   width: 100%;
@@ -42,7 +46,7 @@
 .logo-text {
   font-size: 2rem;
   font-weight: 800;
-  color: #333;
+  color: var(--primary);
   vertical-align: middle;
 }
 
@@ -70,7 +74,7 @@
 
 .nav-links a {
   text-decoration: none;
-  color: #333;
+  color: var(--text);
   font-weight: 500;
   transition: color 0.3s ease;
 }
@@ -106,13 +110,13 @@
 }
 
 .btn.admin {
-  background: #333;
-  color: white;
+  background: var(--admin-dark);
+  color: #fff;
 }
 
 .btn.customer {
   background: var(--primary);
-  color: white;
+  color: #fff;
 }
 
 .login-buttons-bar {
@@ -160,7 +164,8 @@
 }
 
 .user-dropdown-item:hover {
-  background: #f0f0f0;
+  background: var(--secondary);
+  color: var(--text);
 }
 
 /* Admin dashboard link */

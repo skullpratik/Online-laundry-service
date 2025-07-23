@@ -1,6 +1,6 @@
 /* ReviewForm.css */
 .review-form-section {
-  background: #f9f9f9;
+  background: #f6fafd;
   padding: 60px 20px;
   text-align: center;
   font-family: 'Times New Roman', serif;
@@ -8,7 +8,7 @@
 .review-form-section h2 {
   font-size: 2.2rem;
   margin-bottom: 30px;
-  color: #222;
+  color: #0077b6;
 }
 .review-form {
   max-width: 600px;
@@ -22,18 +22,19 @@
   padding: 12px 15px;
   font-size: 1rem;
   font-family: inherit;
-  border: 1px solid #ccc;
+  border: 1px solid #48cae4;
   border-radius: 6px;
   transition: border-color .3s;
+  background: #fff;
 }
 .review-form input:focus,
 .review-form textarea:focus {
-  border-color: #007bff;
+  border-color: #0077b6;
   outline: none;
 }
 .review-form button {
   padding: 12px;
-  background: #007bff;
+  background: linear-gradient(90deg, #0077b6 0%, #48cae4 100%);
   color: #fff;
   font-size: 1rem;
   border: none;
@@ -42,7 +43,7 @@
   transition: background .3s;
 }
 .review-form button:hover {
-  background: #0056b3;
+  background: linear-gradient(90deg, #48cae4 0%, #0077b6 100%);
 }
 .review-success {
   color: green;

@@ -13,7 +13,7 @@ html {
 
 body {
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(-45deg, #e0f7fa, #f9f9ff, #b2dfdb, #16a085);
+  background: linear-gradient(-45deg, #f6fafd, #e0f7fa, #b2dfdb, #48cae4);
   background-size: 400% 400%;
   animation: gradientBG 12s ease infinite;
   color: #222;

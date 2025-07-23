@@ -1,7 +1,7 @@
 /* Footer.css */
 .footer {
-  background: linear-gradient(135deg, #1f1f1f 60%, #29307a 100%);
-  color: #f0f0f0;
+  background: linear-gradient(135deg, #0077b6 60%, #48cae4 100%);
+  color: #f6fafd;
   padding: 48px 10px 18px;
   font-family: 'Segoe UI', 'Times New Roman', serif;
 }
@@ -26,7 +26,7 @@
 }
 .footer-left .tagline {
   font-style: italic;
-  color: #dcdcdc;
+  color: #e0e7ef;
   margin-bottom: 18px;
   font-size: 1.1rem;
 }
@@ -34,7 +34,7 @@
 .footer-right p,
 .footer-right a {
   font-size: 1.08rem;
-  color: #ccc;
+  color: #e0e7ef;
   line-height: 1.7;
   text-decoration: none;
 }
@@ -67,8 +67,8 @@
 .footer-bottom {
   text-align: center;
   padding-top: 24px;
-  border-top: 1px solid #444;
-  color: #aaa;
+  border-top: 1px solid #48cae4;
+  color: #b2dfdb;
   font-size: 1rem;
   margin-top: 24px;
 }
