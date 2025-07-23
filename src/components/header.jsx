@@ -129,7 +129,8 @@ const Header = () => {
                       <div className="user-dropdown">
                         <button
                           className="user-dropdown-item"
-                          onClick={() => {
+                          onClick={e => {
+                            e.stopPropagation();
                             logout();
                             setDropdownOpen(false);
                             navigate('/');
@@ -210,7 +211,8 @@ const Header = () => {
                       <div className="user-dropdown">
                         <button
                           className="user-dropdown-item"
-                          onClick={() => {
+                          onClick={e => {
+                            e.stopPropagation();
                             logout();
                             setDropdownOpen(false);
                             navigate('/');
