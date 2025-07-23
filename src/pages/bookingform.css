@@ -111,9 +111,19 @@
   transform: translateY(-4px) scale(1.02);
 }
 
+.view-bookings-link-bar {
+  margin-top: 16px;
+  text-align: center;
+}
+.view-bookings-link {
+  color: #16a085;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
 @media (max-width: 768px) {
   .booking-form-container {
-    padding: 18px 4px;
+    padding: 18px 18px;
     border-radius: 10px;
     margin: 40px 0;
   }
