@@ -11,6 +11,7 @@ import TestimonialSlider from './components/testimonial';
 import ReviewForm from './components/reviewform';
 import Footer from './components/footer';
 import SignInModal from './components/SignInModal';
+import { useAuth } from './AuthContext';
 
 // Pages
 import PricingPage from './pages/pricing';
@@ -37,14 +38,17 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [modalMode, setModalMode] = useState('login');
   const loginTimerRef = useRef(null);
+  const { user } = useAuth();
 
   useEffect(() => {
-    loginTimerRef.current = setTimeout(() => {
-      setModalMode('login');
-      setShowModal(true);
-    }, 2000);
+    if (!user) {
+      loginTimerRef.current = setTimeout(() => {
+        setModalMode('login');
+        setShowModal(true);
+      }, 2000);
+    }
     return () => clearTimeout(loginTimerRef.current);
-  }, []);
+  }, [user]);
 
   const handleLoginClick = () => {
     clearTimeout(loginTimerRef.current);
@@ -68,7 +72,7 @@ function App() {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </main>
-      <SignInModal open={showModal} onClose={() => setShowModal(false)} defaultMode={modalMode} />
+      <SignInModal open={showModal && !user} onClose={() => setShowModal(false)} defaultMode={modalMode} />
       <Footer />
     </>
   );

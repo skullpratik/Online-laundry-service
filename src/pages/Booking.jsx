@@ -5,7 +5,6 @@ import './bookingform.css';
 
 const BookingForm = ({ onLoginClick }) => {
   const { user, token } = useAuth();
-  const [showViewBookings, setShowViewBookings] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -16,11 +15,6 @@ const BookingForm = ({ onLoginClick }) => {
       clothCount: 1
     }
   });
-
-  // Show 'View your booking' when logged in
-  useEffect(() => {
-    setShowViewBookings(!!user);
-  }, [user]);
 
   const onSubmit = async (data) => {
     if (!user) {
@@ -118,11 +112,6 @@ const BookingForm = ({ onLoginClick }) => {
           {isSubmitting ? 'Booking...' : 'Book Now'}
         </button>
       </form>
-      {showViewBookings && (
-        <div className="view-bookings-link-bar">
-          <a href="/my-bookings" className="view-bookings-link">View your bookings</a>
-        </div>
-      )}
     </div>
   );
 };

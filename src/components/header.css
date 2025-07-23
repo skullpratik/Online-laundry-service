@@ -194,7 +194,10 @@
 
 .header-user-icon {
   vertical-align: middle;
-
+  margin-bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 1.2em;
 }
 .user-menu-btn, .view-booking-link {
   font-size: 1.05rem;
