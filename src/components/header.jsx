@@ -155,6 +155,68 @@ const Header = () => {
 
         {/* Mobile Menu Content (hidden on desktop) */}
         <div ref={menuContentRef} className={`menu-content mobile-only${menuOpen ? ' open' : ''}`}>
+          {/* Show user/admin dropdown in mobile menu if logged in */}
+          {(isAdmin || user) && (
+            <div className="header-user-row">
+              <FaUserCircle size={28} className="header-user-icon" />
+              {isAdmin ? (
+                <div className="header-admin-dropdown-row">
+                  <button
+                    className="user-menu-btn"
+                    onClick={() => setAdminDropdownOpen(!adminDropdownOpen)}
+                  >
+                    Admin
+                  </button>
+                  <button
+                    className="user-menu-btn view-dashboard-btn"
+                    title="View Dashboard"
+                    onClick={() => navigate('/admin-dashboard')}
+                  >
+                    <FaClipboardList size={22} />
+                    <span>Dashboard</span>
+                  </button>
+                  {adminDropdownOpen && (
+                    <div className="user-dropdown">
+                      <button
+                        className="user-dropdown-item"
+                        onClick={() => {
+                          localStorage.removeItem('isAdmin');
+                          navigate('/');
+                        }}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="header-user-dropdown-row" ref={dropdownRef}>
+                  <button
+                    className="user-menu-btn"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  >
+                    {getDisplayName()}
+                  </button>
+                  <span
+                    className="view-booking-link"
+                    onClick={() => navigate('/my-bookings')}
+                  >
+                    View Booking
+                  </span>
+                  {dropdownOpen && (
+                    <div className="user-dropdown">
+                      <button
+                        className="user-dropdown-item"
+                        onClick={logout}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
           <nav className="nav-links">
             <Link to="/" onClick={handleNavClick}>Home</Link>
             <Link to="/services" onClick={handleNavClick}>Services</Link>
