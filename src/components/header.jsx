@@ -56,6 +56,8 @@ const Header = () => {
 
   return (
     <header className="header">
+      {/* TEMP: Test Logout Button for Debugging */}
+      <button style={{position: 'absolute', top: 0, left: 0, zIndex: 9999}} onClick={() => { logout(); console.log('Test logout'); }}>Test Logout</button>
       <div className="header-content">
         {/* Hamburger and Logo Row for mobile */}
         <div className="logo-row">
@@ -115,34 +117,35 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <div className="header-user-dropdown-row" ref={dropdownRef}>
-                  <button
-                    className="user-menu-btn"
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                  >
-                    {getDisplayName()}
-                  </button>
+                <div className="header-user-dropdown-row">
+                  <div style={{ position: 'relative' }} ref={dropdownRef}>
+                    <button
+                      className="user-menu-btn"
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                    >
+                      {getDisplayName()}
+                    </button>
+                    {dropdownOpen && (
+                      <div className="user-dropdown">
+                        <button
+                          className="user-dropdown-item"
+                          onClick={() => {
+                            logout();
+                            setDropdownOpen(false);
+                            navigate('/');
+                          }}
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    )}
+                  </div>
                   <span
                     className="view-booking-link"
                     onClick={() => navigate('/my-bookings')}
                   >
                     View Booking
                   </span>
-                  {dropdownOpen && (
-                    <div className="user-dropdown">
-                      <button
-                        className="user-dropdown-item"
-                        onClick={() => {
-                          console.log('User logout clicked');
-                          logout();
-                          setDropdownOpen(false);
-                          navigate('/');
-                        }}
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
@@ -195,35 +198,35 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <div className="header-user-dropdown-row" ref={dropdownRef}>
-                  <button
-                    className="user-menu-btn"
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                  >
-                    {getDisplayName()}
-                  </button>
+                <div className="header-user-dropdown-row">
+                  <div style={{ position: 'relative' }} ref={dropdownRef}>
+                    <button
+                      className="user-menu-btn"
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                    >
+                      {getDisplayName()}
+                    </button>
+                    {dropdownOpen && (
+                      <div className="user-dropdown">
+                        <button
+                          className="user-dropdown-item"
+                          onClick={() => {
+                            logout();
+                            setDropdownOpen(false);
+                            navigate('/');
+                          }}
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    )}
+                  </div>
                   <span
                     className="view-booking-link"
                     onClick={() => navigate('/my-bookings')}
                   >
                     View Booking
                   </span>
-                  {dropdownOpen && (
-                    <div className="user-dropdown">
-                      <button
-                        className="user-dropdown-item"
-                        onClick={() => {
-                          console.log('User logout clicked');
-                          logout();
-                          setDropdownOpen(false);
-                          setMenuOpen(false);
-                          navigate('/');
-                        }}
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
