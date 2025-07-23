@@ -31,11 +31,15 @@ const AdminDashboard = () => {
   }, [navigate]);
 
   const handleStatusChange = async (id, newStatus) => {
+    let cancelReason = '';
+    if (newStatus === 'cancelled') {
+      cancelReason = prompt('Enter reason for cancellation:', 'Order cancelled: out of range') || 'Order cancelled: out of range';
+    }
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/status/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus })
+        body: JSON.stringify(cancelReason ? { status: newStatus, cancelReason } : { status: newStatus })
       });
       if (!res.ok) throw new Error('Failed to update status');
       const updated = await res.json();
@@ -87,6 +91,7 @@ const AdminDashboard = () => {
                     <option value="processed">Processed</option>
                     <option value="on the way">On the Way</option>
                     <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
                   </select>
                 </td>
                 <td>{new Date(b.date).toLocaleString()}</td>

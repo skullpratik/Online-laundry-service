@@ -4,11 +4,13 @@ import './SignInModal.css';
 
 const SignInModal = ({ open, onClose }) => {
   const { login, register } = useAuth();
-  const [isRegister, setIsRegister] = useState(false);
+  const [isRegister, setIsRegister] = useState(true);
   const [form, setForm] = useState({ email: '', phone: '', password: '', name: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  // Add a ref for the password input
+  const passwordInputRef = React.useRef(null);
 
   if (!open) return null;
 
@@ -20,6 +22,61 @@ const SignInModal = ({ open, onClose }) => {
     e.preventDefault();
     setError('');
     setSuccess('');
+    if (isRegister) {
+      // Registration validation
+      if (!form.phone.trim()) {
+        setError('Phone number is required.');
+        setLoading(false);
+        return;
+      }
+      if (!form.name.trim()) {
+        setError('Name is required.');
+        setLoading(false);
+        return;
+      }
+      if (/\d/.test(form.name)) {
+        setError('Name cannot contain numbers.');
+        setLoading(false);
+        return;
+      }
+      if (/[^0-9]/.test(form.phone)) {
+        setError('Phone number must contain only digits.');
+        setLoading(false);
+        return;
+      }
+      if (form.password.length < 6) {
+        setError('Password must be at least 6 characters.');
+        setLoading(false);
+        return;
+      }
+    } else {
+      // Login validation: require name, phone, password
+      if (!form.phone.trim()) {
+        setError('Phone number is required.');
+        setLoading(false);
+        return;
+      }
+      if (!form.name.trim()) {
+        setError('Name is required.');
+        setLoading(false);
+        return;
+      }
+      if (/\d/.test(form.name)) {
+        setError('Name cannot contain numbers.');
+        setLoading(false);
+        return;
+      }
+      if (/[^0-9]/.test(form.phone)) {
+        setError('Phone number must contain only digits.');
+        setLoading(false);
+        return;
+      }
+      if (form.password.length < 6) {
+        setError('Password must be at least 6 characters.');
+        setLoading(false);
+        return;
+      }
+    }
     setLoading(true);
     try {
       if (isRegister) {
@@ -48,42 +105,87 @@ const SignInModal = ({ open, onClose }) => {
           &times;
         </button>
         <h2 className="modal-title">{isRegister ? 'Register' : 'Sign In'}</h2>
-        <form onSubmit={handleSubmit} className="modal-form">
-          <input
-            type="text"
-            name="email"
-            placeholder="Email (optional)"
-            value={form.email}
-            onChange={handleChange}
-            className="modal-input"
-          />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone (optional)"
-            value={form.phone}
-            onChange={handleChange}
-            className="modal-input"
-          />
-          {isRegister && (
-            <input
-              type="text"
-              name="name"
-              placeholder="Name (optional)"
-              value={form.name}
-              onChange={handleChange}
-              className="modal-input"
-            />
+        <form onSubmit={handleSubmit} className="modal-form" autoComplete="off">
+          {isRegister ? (
+            <>
+              <input
+                type="text"
+                name="login_phone"
+                placeholder="Phone (required)"
+                value={form.phone}
+                onChange={handleChange}
+                className="modal-input"
+                autoComplete="off"
+                required
+              />
+              <input
+                type="text"
+                name="login_name"
+                placeholder="Name (required)"
+                value={form.name}
+                onChange={handleChange}
+                className="modal-input"
+                autoComplete="off"
+                required
+              />
+              <input
+                type="text"
+                name="login_email"
+                placeholder="Email (optional)"
+                value={form.email}
+                onChange={handleChange}
+                className="modal-input"
+                autoComplete="off"
+              />
+              <input
+                type="password"
+                name="login_password"
+                placeholder="Password (min 6 characters)"
+                value={form.password}
+                onChange={handleChange}
+                className="modal-input"
+                required
+                ref={passwordInputRef}
+                autoComplete="off"
+                minLength={6}
+              />
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                name="login_phone"
+                placeholder="Phone (required)"
+                value={form.phone}
+                onChange={handleChange}
+                className="modal-input"
+                autoComplete="off"
+                required
+              />
+              <input
+                type="text"
+                name="login_name"
+                placeholder="Name (required)"
+                value={form.name}
+                onChange={handleChange}
+                className="modal-input"
+                autoComplete="off"
+                required
+              />
+              <input
+                type="password"
+                name="login_password"
+                placeholder="Password (min 6 characters)"
+                value={form.password}
+                onChange={handleChange}
+                className="modal-input"
+                required
+                ref={passwordInputRef}
+                autoComplete="off"
+                minLength={6}
+              />
+            </>
           )}
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={handleChange}
-            className="modal-input"
-            required
-          />
           {error && <div className="modal-error">{error}</div>}
           {success && <div className="modal-success">{success}</div>}
           <button type="submit" className="modal-submit" disabled={loading}>
@@ -91,7 +193,21 @@ const SignInModal = ({ open, onClose }) => {
           </button>
         </form>
         <div className="modal-switch">
-          <button onClick={() => { setIsRegister(!isRegister); setError(''); setSuccess(''); }} className="modal-switch-btn">
+          <button
+            onClick={() => {
+              if (isRegister || success) {
+                setIsRegister(false);
+                setError('');
+                setSuccess('');
+                setTimeout(() => passwordInputRef.current && passwordInputRef.current.focus(), 0);
+              } else {
+                setIsRegister(true);
+                setError('');
+                setSuccess('');
+              }
+            }}
+            className="modal-switch-btn"
+          >
             {isRegister ? 'Already have an account? Sign In' : "Don't have an account? Register"}
           </button>
         </div>

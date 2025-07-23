@@ -110,13 +110,18 @@ const MyBookings = () => {
                 display: 'inline-block',
                 padding: '2px 12px',
                 borderRadius: 12,
-                background: b.status === 'delivered' ? '#16a085' : b.status === 'on the way' ? '#f6c90e' : b.status === 'processed' ? '#f98d3a' : b.status === 'accepted' ? '#0077b6' : '#e74c3c',
+                background: b.status === 'delivered' ? '#16a085' : b.status === 'on the way' ? '#f6c90e' : b.status === 'processed' ? '#f98d3a' : b.status === 'accepted' ? '#0077b6' : b.status === 'cancelled' ? '#888' : '#e74c3c',
                 color: '#fff',
                 fontWeight: 600,
                 fontSize: '0.98rem',
                 textTransform: 'capitalize',
                 marginLeft: 6
               }}>{b.status}</span></div>
+              {b.status === 'cancelled' && b.cancelReason && (
+                <div style={{ color: '#e74c3c', marginTop: 6, fontWeight: 600 }}>
+                  <span>Order Cancelled: {b.cancelReason}</span>
+                </div>
+              )}
               <div><strong>Date:</strong> {new Date(b.date).toLocaleString()}</div>
               <div style={{ marginTop: 10, display: 'flex', gap: 18 }}>
                 <span style={{ color: '#e74c3c', cursor: 'pointer', fontWeight: 600 }} onClick={() => handleDelete(b._id)}>

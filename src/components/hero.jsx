@@ -8,16 +8,25 @@ const Hero = () => {
   const { user } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const hasShownPopup = useRef(false);
+  const loginTimerRef = useRef(null);
 
   useEffect(() => {
     if (!user && !hasShownPopup.current) {
-      const timer = setTimeout(() => {
+      loginTimerRef.current = setTimeout(() => {
         setShowModal(true);
         hasShownPopup.current = true;
       }, 2000);
-      return () => clearTimeout(timer);
+      return () => clearTimeout(loginTimerRef.current);
     }
   }, [user]);
+
+  const handleLoginClick = () => {
+    clearTimeout(loginTimerRef.current);
+    if (!hasShownPopup.current) {
+      setShowModal(true);
+      hasShownPopup.current = true;
+    }
+  };
 
   return (
   <section className="hero">
@@ -40,6 +49,7 @@ const Hero = () => {
           >
             WhatsApp Us
           </a>
+          <button className="btn login-btn" onClick={handleLoginClick} style={{marginLeft: 8}}>Login</button>
           </div>
           {/* Removed 'View your booking' link from hero section as requested */}
       </div>
