@@ -87,8 +87,8 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
     setLoading(true);
     try {
       if (isRegister) {
-        // Only send name, email (optional), password for backend, but keep phone for frontend validation
-        const regPayload = { name: form.name, password: form.password };
+        // Send name, phone, password, and optional email for backend registration
+        const regPayload = { name: form.name, phone: form.phone, password: form.password };
         if (form.email) regPayload.email = form.email;
         await register(regPayload);
         setIsRegister(false);
