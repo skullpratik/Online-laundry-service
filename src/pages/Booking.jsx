@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../AuthContext';
-import SignInModal from '../components/SignInModal';
 import './bookingform.css';
 
-const BookingForm = () => {
+const BookingForm = ({ onLoginClick }) => {
   const { user, token } = useAuth();
-  const [showModal, setShowModal] = useState(false);
-  const [showViewBookings, setShowViewBookings] = useState(false);
+  const [showViewBookings, setShowViewBookings] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -19,14 +17,6 @@ const BookingForm = () => {
     }
   });
 
-  // Show sign-in modal after 4 seconds if not logged in
-  useEffect(() => {
-    if (!user) {
-      const timer = setTimeout(() => setShowModal(true), 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [user]);
-
   // Show 'View your booking' when logged in
   useEffect(() => {
     setShowViewBookings(!!user);
@@ -34,10 +24,9 @@ const BookingForm = () => {
 
   const onSubmit = async (data) => {
     if (!user) {
-      setShowModal(true);
+      if (onLoginClick) onLoginClick();
       return;
     }
-    console.log('Submitting booking:', data);
     const payload = { ...data, clothCount: Number(data.clothCount) };
     try {
       const response = await fetch(
@@ -53,7 +42,6 @@ const BookingForm = () => {
       );
       if (!response.ok) throw new Error('Failed to submit booking');
       const result = await response.json();
-      console.log('Booking created:', result);
       alert('Booking submitted!');
       reset();
     } catch (err) {
@@ -126,26 +114,15 @@ const BookingForm = () => {
           {errors.serviceType && <small className="error">{errors.serviceType.message}</small>}
         </label>
 
-        <label>
-          Notes / Cloth Description:
-          <textarea
-            rows="4"
-            {...register('notes')}
-          />
-        </label>
-
         <button type="submit" className="btn book-btn animated-btn" disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Submit Booking'}
+          {isSubmitting ? 'Booking...' : 'Book Now'}
         </button>
-        {showViewBookings && (
-          <div className="view-bookings-link-bar">
-            <a href="/my-bookings" className="view-bookings-link">
-              View your booking
-            </a>
-          </div>
-        )}
       </form>
-      <SignInModal open={showModal} onClose={() => setShowModal(false)} />
+      {showViewBookings && (
+        <div className="view-bookings-link-bar">
+          <a href="/my-bookings" className="view-bookings-link">View your bookings</a>
+        </div>
+      )}
     </div>
   );
 };

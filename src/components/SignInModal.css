@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100vw;         /* Full overlay */
   height: 100vh;
   background: rgba(0,0,0,0.4);
   display: flex;
@@ -16,12 +16,13 @@
 .modal {
   position: relative;
   background: #fff;
-  padding: 1.5rem 1rem 1rem 1rem;
+  padding: 1.2rem 0.7rem 0.8rem 0.7rem;
   border-radius: 16px;
   min-width: 0;
-  max-width: 340px;
+  width: 380px;
+  max-width: 90vw;
+  margin: 0 auto;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  width: 100%;
   box-sizing: border-box;
   animation: modalIn 0.2s cubic-bezier(.4,2,.6,1) both;
 }
@@ -137,22 +138,13 @@
   color: #16a085;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .modal {
+    width: 90vw;
+    max-width: 360px;
     min-width: 0;
-    max-width: 98vw;
-    padding: 1.1rem 0.3rem 0.8rem 0.3rem;
-    border-radius: 12px;
-  }
-  .modal-title {
-    font-size: 1.15rem;
-  }
-  .modal-input {
-    font-size: 0.98rem;
-    padding: 0.6rem 0.7rem;
-  }
-  .modal-submit {
-    font-size: 1rem;
-    padding: 0.7rem 0;
+    margin: 40px auto;
+    padding: 1rem;
+    border-radius: 16px;
   }
 } 

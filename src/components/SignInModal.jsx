@@ -2,15 +2,22 @@ import React, { useState } from 'react';
 import { useAuth } from '../AuthContext';
 import './SignInModal.css';
 
-const SignInModal = ({ open, onClose }) => {
+const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
   const { login, register } = useAuth();
-  const [isRegister, setIsRegister] = useState(true);
+  const [isRegister, setIsRegister] = useState(defaultMode === 'register');
   const [form, setForm] = useState({ email: '', phone: '', password: '', name: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   // Add a ref for the password input
   const passwordInputRef = React.useRef(null);
+
+  // If the modal is opened and defaultMode changes, update isRegister
+  React.useEffect(() => {
+    if (open) {
+      setIsRegister(defaultMode === 'register');
+    }
+  }, [open, defaultMode]);
 
   if (!open) return null;
 
@@ -95,8 +102,8 @@ const SignInModal = ({ open, onClose }) => {
   };
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal">
+    <div className="modal-backdrop" onClick={e => { if (e.target.classList.contains('modal-backdrop')) onClose(); }}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
         <button
           onClick={onClose}
           className="modal-close"
@@ -104,7 +111,7 @@ const SignInModal = ({ open, onClose }) => {
         >
           &times;
         </button>
-        <h2 className="modal-title">{isRegister ? 'Register' : 'Sign In'}</h2>
+        <h2 className="modal-title">{isRegister ? 'Register' : 'Login'}</h2>
         <form onSubmit={handleSubmit} className="modal-form" autoComplete="off">
           {isRegister ? (
             <>
@@ -189,7 +196,7 @@ const SignInModal = ({ open, onClose }) => {
           {error && <div className="modal-error">{error}</div>}
           {success && <div className="modal-success">{success}</div>}
           <button type="submit" className="modal-submit" disabled={loading}>
-            {loading ? (isRegister ? 'Registering...' : 'Signing in...') : (isRegister ? 'Register' : 'Sign In')}
+            {loading ? (isRegister ? 'Registering...' : 'Logging in...') : (isRegister ? 'Register' : 'Login')}
           </button>
         </form>
         <div className="modal-switch">
@@ -208,7 +215,7 @@ const SignInModal = ({ open, onClose }) => {
             }}
             className="modal-switch-btn"
           >
-            {isRegister ? 'Already have an account? Sign In' : "Don't have an account? Register"}
+            {isRegister ? 'Already have an account? Login' : "Don't have an account? Register"}
           </button>
         </div>
       </div>

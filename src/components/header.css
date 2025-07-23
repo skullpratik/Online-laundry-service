@@ -40,17 +40,25 @@
 }
 
 .logo-text {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: 800;
   color: #333;
+  vertical-align: middle;
 }
 
 /* Nav links + buttons container */
 .nav-actions {
   display: flex;
-  align-items: center;
-  gap: 24px;
+  align-items: baseline;
+  flex-direction: row;
+  gap: 32px;
   margin-left: auto;
+}
+.user-desktop {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+  gap: 14px;
 }
 
 /* Nav links */
@@ -177,6 +185,23 @@
   position: relative;
 }
 
+.header-user-dropdown-row {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.header-user-icon {
+  vertical-align: middle;
+  margin-bottom: 2px;
+}
+.user-menu-btn, .view-booking-link {
+  font-size: 1.05rem;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
 /* Utility classes for device-specific visibility */
 .desktop-only { display: flex; }
 .mobile-only { display: none; }
@@ -295,5 +320,8 @@
   .menu-content.open .nav-links {
     margin-top: 0;
     margin-bottom: 18px;
+  }
+  .logo-text {
+    font-size: 1.4rem;
   }
 }

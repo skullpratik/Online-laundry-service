@@ -2,13 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import { useAuth } from '../AuthContext';
-import SignInModal from './SignInModal';
 import AdminLoginModal from './AdminLoginModal';
 import { FaUserCircle, FaClipboardList } from 'react-icons/fa';
 
-const Header = () => {
+const Header = ({ onLoginClick }) => {
   const { user, logout } = useAuth();
-  const [showModal, setShowModal] = useState(false);
   const [adminModalOpen, setAdminModalOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
@@ -152,7 +150,7 @@ const Header = () => {
               <button className="btn admin" onClick={() => setAdminModalOpen(true)}>
                 Admin
               </button>
-              <button className="btn customer" onClick={() => setShowModal(true)}>
+              <button className="btn customer" onClick={onLoginClick}>
                 Login
               </button>
             </div>
@@ -240,7 +238,7 @@ const Header = () => {
               <button className="btn admin" onClick={() => setAdminModalOpen(true)}>
                 Admin
               </button>
-              <button className="btn customer" onClick={() => setShowModal(true)}>
+              <button className="btn customer" onClick={onLoginClick}>
                 Login
               </button>
             </div>
@@ -249,7 +247,6 @@ const Header = () => {
       </div>
 
       {/* Modals */}
-      <SignInModal open={showModal} onClose={() => setShowModal(false)} />
       <AdminLoginModal open={adminModalOpen} onClose={() => setAdminModalOpen(false)} />
     </header>
   );

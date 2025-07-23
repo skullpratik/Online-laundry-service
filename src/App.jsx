@@ -1,6 +1,6 @@
 // App.jsx
-import React from 'react';
-import { Routes, Route,Link } from 'react-router-dom';
+import React, { useRef, useState, useEffect } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 // Components
@@ -10,6 +10,7 @@ import WhyChooseUs from './components/whychooseus';
 import TestimonialSlider from './components/testimonial';
 import ReviewForm from './components/reviewform';
 import Footer from './components/footer';
+import SignInModal from './components/SignInModal';
 
 // Pages
 import PricingPage from './pages/pricing';
@@ -21,10 +22,10 @@ import BookingForm from './pages/Booking';
 import MyBookings from './pages/MyBookings';
 import AdminDashboard from './pages/AdminDashboard';
 
-function HomePage() {
+function HomePage({ onLoginClick }) {
   return (
     <>
-      <HeroSection />
+      <HeroSection onLoginClick={onLoginClick} />
       <WhyChooseUs />
       <TestimonialSlider />
       <ReviewForm />
@@ -33,22 +34,41 @@ function HomePage() {
 }
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
+  const [modalMode, setModalMode] = useState('login');
+  const loginTimerRef = useRef(null);
+
+  useEffect(() => {
+    loginTimerRef.current = setTimeout(() => {
+      setModalMode('login');
+      setShowModal(true);
+    }, 2000);
+    return () => clearTimeout(loginTimerRef.current);
+  }, []);
+
+  const handleLoginClick = () => {
+    clearTimeout(loginTimerRef.current);
+    setModalMode('login');
+    setShowModal(true);
+  };
+
   return (
     <>
-      <Header />
+      <Header onLoginClick={handleLoginClick} />
       <main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage onLoginClick={handleLoginClick} />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/about" element={<AboutPage />} />
-        <Route path="/customer-login" element={<CustomerLogin />} />
-        <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/book-now" element={<BookingForm />} />
-        <Route path="/my-bookings" element={<MyBookings />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/customer-login" element={<CustomerLogin />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="/book-now" element={<BookingForm onLoginClick={handleLoginClick} />} />
+          <Route path="/my-bookings" element={<MyBookings />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </main>
+      <SignInModal open={showModal} onClose={() => setShowModal(false)} defaultMode={modalMode} />
       <Footer />
     </>
   );
