@@ -3,33 +3,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
 import { useAuth } from '../AuthContext';
 import SignInModal from './SignInModal';
-import { FaUserCircle, FaClipboardList } from 'react-icons/fa';
 import AdminLoginModal from './AdminLoginModal';
+import { FaUserCircle, FaClipboardList } from 'react-icons/fa';
 
 const Header = () => {
   const { user, logout } = useAuth();
   const [showModal, setShowModal] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const navigate = useNavigate();
   const [adminModalOpen, setAdminModalOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const dropdownRef = useRef(null);
   const adminDropdownRef = useRef(null);
   const menuContentRef = useRef(null);
+  const navigate = useNavigate();
 
-  const getFirstName = (nameOrEmailOrPhone) => {
-    if (!nameOrEmailOrPhone) return '';
-    if (user?.name) return user.name.split(' ')[0];
-    if (user?.email) return user.email.split('@')[0];
-    if (user?.phone) return user.phone;
-    return '';
-  };
-
-  // Check if admin is logged in
   const isAdmin = typeof window !== 'undefined' && localStorage.getItem('isAdmin') === 'true';
 
-  // Helper to get display name
   const getDisplayName = () => {
     if (isAdmin) return 'Admin';
     if (user?.name) return user.name.split(' ')[0];
@@ -38,87 +29,66 @@ const Header = () => {
     return '';
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setDropdownOpen(false);
       }
-    }
-    if (dropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [dropdownOpen]);
-
-  // Close admin dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (adminDropdownRef.current && !adminDropdownRef.current.contains(event.target)) {
+      if (adminDropdownRef.current && !adminDropdownRef.current.contains(e.target)) {
         setAdminDropdownOpen(false);
       }
-    }
-    if (adminDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [adminDropdownOpen]);
-
-  // Close mobile menu when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuOpen && menuContentRef.current && !menuContentRef.current.contains(event.target)) {
+      if (menuOpen && menuContentRef.current && !menuContentRef.current.contains(e.target)) {
         setMenuOpen(false);
       }
-    }
-    if (menuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('touchstart', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
   }, [menuOpen]);
 
-  // Close menu on navigation (optional, improves UX)
-  const handleNavClick = () => setMenuOpen(false);
+  const handleNavClick = () => {
+    setMenuOpen(false);
+  };
 
   return (
     <header className="header">
       <div className="header-content">
-        {/* Hamburger icon on the right with animated bars */}
-        <div
-          className={`menu-toggle${menuOpen ? ' open' : ''}`}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="bar1"></span>
-          <span className="bar2"></span>
-          <span className="bar3"></span>
+        {/* Hamburger and Logo Row for mobile */}
+        <div className="logo-row">
+          <div
+            className={`menu-toggle${menuOpen ? ' open' : ''}`}
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            <span className="bar1"></span>
+            <span className="bar2"></span>
+            <span className="bar3"></span>
+          </div>
+          <Link to="/" className="logo-box">
+            <img src="/logo.jpg" alt="Logo" className="logo-img" />
+            <span className="logo-text">SKLdrycleaner's</span>
+          </Link>
         </div>
-        {/* Logo */}
-        <Link to="/" className="logo-box">
-          <img src="/logo.jpg" alt="Logo" className="logo-img" />
-          <span className="logo-text">SKLdrycleaner's</span>
-        </Link>
-        {/* Nav + Buttons */}
-        <div ref={menuContentRef} className={`menu-content${menuOpen ? ' open' : ''}`}>
-          {/* User/Admin dropdown at top of menu on mobile */}
-          {(isAdmin || user) && (
-            <div className="header-user-row">
+
+        {/* Desktop nav + buttons (hidden on mobile) */}
+        <div className="nav-actions desktop-only">
+          <nav className="nav-links">
+            <Link to="/">Home</Link>
+            <Link to="/services">Services</Link>
+            <Link to="/pricing">Pricing</Link>
+            <Link to="/about">About</Link>
+          </nav>
+          {(isAdmin || user) ? (
+            <div className="user-desktop">
               <FaUserCircle size={28} className="header-user-icon" />
               {isAdmin ? (
-                <div ref={adminDropdownRef} className="header-admin-dropdown-row">
+                <div className="header-admin-dropdown-row">
                   <button
                     className="user-menu-btn"
-                    onClick={() => setAdminDropdownOpen((open) => !open)}
+                    onClick={() => setAdminDropdownOpen(!adminDropdownOpen)}
                   >
                     Admin
                   </button>
@@ -127,8 +97,8 @@ const Header = () => {
                     title="View Dashboard"
                     onClick={() => navigate('/admin-dashboard')}
                   >
-                    <FaClipboardList size={22} className="header-dashboard-icon" />
-                    <span className="header-dashboard-text">View Dashboard</span>
+                    <FaClipboardList size={22} />
+                    <span>Dashboard</span>
                   </button>
                   {adminDropdownOpen && (
                     <div className="user-dropdown">
@@ -145,10 +115,10 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <div ref={dropdownRef} className="header-user-dropdown-row">
+                <div className="header-user-dropdown-row" ref={dropdownRef}>
                   <button
                     className="user-menu-btn"
-                    onClick={() => setDropdownOpen((open) => !open)}
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
                   >
                     {getDisplayName()}
                   </button>
@@ -162,9 +132,7 @@ const Header = () => {
                     <div className="user-dropdown">
                       <button
                         className="user-dropdown-item"
-                        onClick={() => {
-                          logout();
-                        }}
+                        onClick={logout}
                       >
                         Logout
                       </button>
@@ -173,8 +141,26 @@ const Header = () => {
                 </div>
               )}
             </div>
+          ) : (
+            <div className="login-buttons-bar">
+              <button className="btn admin" onClick={() => setAdminModalOpen(true)}>
+                Admin
+              </button>
+              <button className="btn customer" onClick={() => setShowModal(true)}>
+                Login
+              </button>
+            </div>
           )}
-          {/* Show Admin and Login buttons at top if no one is logged in */}
+        </div>
+
+        {/* Mobile Menu Content (hidden on desktop) */}
+        <div ref={menuContentRef} className={`menu-content mobile-only${menuOpen ? ' open' : ''}`}>
+          <nav className="nav-links">
+            <Link to="/" onClick={handleNavClick}>Home</Link>
+            <Link to="/services" onClick={handleNavClick}>Services</Link>
+            <Link to="/pricing" onClick={handleNavClick}>Pricing</Link>
+            <Link to="/about" onClick={handleNavClick}>About</Link>
+          </nav>
           {!(isAdmin || user) && (
             <div className="login-buttons-bar">
               <button className="btn admin" onClick={() => setAdminModalOpen(true)}>
@@ -185,14 +171,10 @@ const Header = () => {
               </button>
             </div>
           )}
-          <nav className="nav-links">
-            <Link to="/" onClick={handleNavClick}>Home</Link>
-            <Link to="/services" onClick={handleNavClick}>Services</Link>
-            <Link to="/pricing" onClick={handleNavClick}>Pricing</Link>
-            <Link to="/about" onClick={handleNavClick}>About</Link>
-          </nav>
         </div>
       </div>
+
+      {/* Modals */}
       <SignInModal open={showModal} onClose={() => setShowModal(false)} />
       <AdminLoginModal open={adminModalOpen} onClose={() => setAdminModalOpen(false)} />
     </header>

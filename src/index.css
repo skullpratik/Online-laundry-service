@@ -29,7 +29,7 @@ body {
 }
 
 main {
-  padding-top: 80px;
+ padding-top: 0;
 }
 
 .page-section, .about-wrapper, .booking-form-container, .fade-in, .testimonial-section, .review-form-section, .services-container, .pricing-container {

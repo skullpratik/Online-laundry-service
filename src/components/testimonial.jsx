@@ -29,10 +29,10 @@ const TestimonialSlider = () => {
             </div>
           ) : (
             testimonials.map((item, index) => (
-              <div className="testimonial-card" key={index}>
-                <p>"{item.text}"</p>
-                <h4>{item.name}</h4>
-              </div>
+            <div className="testimonial-card" key={index}>
+              <p>"{item.text}"</p>
+              <h4>{item.name}</h4>
+            </div>
             ))
           )}
         </div>

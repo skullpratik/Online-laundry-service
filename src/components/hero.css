@@ -3,30 +3,29 @@
   background: linear-gradient(135deg, #f9f9ff 0%, #e0f7fa 60%, #a1c4fd 100%);
   padding: 0 10px 60px 10px;
   font-family: 'Inter', 'Segoe UI', serif;
-  min-height: 70vh;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
   animation: heroFadeIn 1.2s cubic-bezier(.4,1.4,.6,1) both;
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
-.no-gap {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
+
+
 @keyframes heroFadeIn {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .hero-content {
   max-width: 1200px;
+  padding-top:10rem;
   margin: 0 auto 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   min-height: 60vh;
-  padding-top: 0;
+ 
 }
 .hero-text {
   flex: 1;
@@ -143,6 +142,7 @@
     text-align: center;
     min-height: 70vh;
     margin-top: 0;
+    padding-top: 4rem;
   }
   .hero-text { padding: 0; }
   .hero-image {
