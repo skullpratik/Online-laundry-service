@@ -135,7 +135,6 @@ const Header = () => {
                         onClick={() => {
                           logout();
                           setDropdownOpen(false);
-                          setMenuOpen(false);
                           navigate('/');
                         }}
                       >
