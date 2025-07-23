@@ -40,8 +40,8 @@ const ReviewForm = () => {
         <input type="email" name="email" placeholder="Your Email" value={form.email} onChange={handleChange} required />
         <textarea name="review" rows="4" placeholder="Write your review here..." value={form.review} onChange={handleChange} required></textarea>
         <button type="submit" disabled={submitting}>{submitting ? 'Submitting...' : 'Submit Review'}</button>
-        {success && <div style={{ color: 'green', marginTop: 8 }}>{success}</div>}
-        {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
+        {success && <div className="review-success">{success}</div>}
+        {error && <div className="review-error">{error}</div>}
       </form>
     </section>
   );

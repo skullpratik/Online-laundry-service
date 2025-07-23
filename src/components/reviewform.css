@@ -44,14 +44,23 @@
 .review-form button:hover {
   background: #0056b3;
 }
+.review-success {
+  color: green;
+  margin-top: 8px;
+}
+.review-error {
+  color: red;
+  margin-top: 8px;
+}
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .review-form-section {
     padding: 24px 4px;
   }
   .review-form {
     max-width: 100%;
     padding: 0 2vw;
+    gap: 10px;
   }
   .review-form input,
   .review-form textarea {
@@ -64,5 +73,6 @@
     width: 100%;
     font-size: 1.05rem;
     padding: 14px 0;
+    border-radius: 8px;
   }
 }

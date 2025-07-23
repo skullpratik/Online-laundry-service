@@ -176,8 +176,8 @@ const Header = () => {
           )}
           {/* Show Admin and Login buttons at top if no one is logged in */}
           {!(isAdmin || user) && (
-            <div style={{ width: '100%', padding: '8px 0', borderBottom: '1px solid #eee', display: 'flex', gap: 8 }}>
-              <button className="btn admin" style={{ background: '#29307a', color: '#fff' }} onClick={() => setAdminModalOpen(true)}>
+            <div className="login-buttons-bar">
+              <button className="btn admin" onClick={() => setAdminModalOpen(true)}>
                 Admin
               </button>
               <button className="btn customer" onClick={() => setShowModal(true)}>

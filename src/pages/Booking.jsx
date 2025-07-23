@@ -138,8 +138,8 @@ const BookingForm = () => {
           {isSubmitting ? 'Submitting...' : 'Submit Booking'}
         </button>
         {showViewBookings && (
-          <div style={{ marginTop: 16, textAlign: 'center' }}>
-            <a href="/my-bookings" style={{ color: '#16a085', textDecoration: 'underline', fontWeight: 500 }}>
+          <div className="view-bookings-link-bar">
+            <a href="/my-bookings" className="view-bookings-link">
               View your booking
             </a>
           </div>

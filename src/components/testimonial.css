@@ -48,3 +48,27 @@
   color: #e67e22;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .testimonial-section {
+    padding: 28px 4px;
+  }
+  .testimonial-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .testimonial-slider {
+    gap: 0.5rem;
+    padding: 4px;
+  }
+  .testimonial-card {
+    flex: 0 0 90vw;
+    padding: 14px 8px;
+    border-radius: 10px;
+    font-size: 0.98rem;
+  }
+  .testimonial-card h4 {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+}

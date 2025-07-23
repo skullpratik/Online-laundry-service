@@ -68,4 +68,31 @@
   line-height: 1.6;
 }
 
+@media (max-width: 768px) {
+  .why-choose-us {
+    padding: 32px 4px;
+  }
+  .why-choose-us h2 {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 2vw;
+  }
+  .feature {
+    padding: 18px 8px;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+  .feature h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+  .feature p {
+    font-size: 0.98rem;
+  }
+}
+
 
