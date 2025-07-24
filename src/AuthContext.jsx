@@ -45,8 +45,15 @@ export function AuthProvider({ children }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
     });
-    if (!res.ok) throw new Error('Login failed');
-    const data = await res.json();
+    let data;
+    try {
+      data = await res.json();
+    } catch {
+      data = {};
+    }
+    if (!res.ok) {
+      throw new Error(data.message || 'Login failed');
+    }
     setToken(data.token);
     setUser(data.user);
     localStorage.setItem('token', data.token);
@@ -59,9 +66,17 @@ export function AuthProvider({ children }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
     });
-    if (!res.ok) throw new Error('Registration failed');
+    let data;
+    try {
+      data = await res.json();
+    } catch {
+      data = {};
+    }
+    if (!res.ok) {
+      throw new Error(data.message || 'Registration failed');
+    }
     // Optionally, auto-login after register
-    return await res.json();
+    return data;
   };
 
   const logout = () => {
