@@ -139,12 +139,17 @@ const MyBookings = () => {
               )}
               <div><strong>Date:</strong> {new Date(b.date).toLocaleString()}</div>
               <div style={{ marginTop: 10, display: 'flex', gap: 18 }}>
-                <span style={{ color: '#e74c3c', cursor: 'pointer', fontWeight: 600 }} onClick={() => handleDelete(b._id)}>
-                  Delete
-                </span>
-                <span style={{ color: '#2980b9', cursor: 'pointer', fontWeight: 600 }} onClick={() => openEditModal(b)}>
-                  Edit
-                </span>
+                {/* Only show edit/delete if status is before 'parcel reached the hub' */}
+                {['pending', 'accepted', 'out for pickup', 'picked up'].includes(b.status) && (
+                  <>
+                    <span style={{ color: '#e74c3c', cursor: 'pointer', fontWeight: 600 }} onClick={() => handleDelete(b._id)}>
+                      Delete
+                    </span>
+                    <span style={{ color: '#2980b9', cursor: 'pointer', fontWeight: 600 }} onClick={() => openEditModal(b)}>
+                      Edit
+                    </span>
+                  </>
+                )}
               </div>
             </li>
           ))}
