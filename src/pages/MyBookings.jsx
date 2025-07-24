@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext';
+import './mybooking.css';
 
 const initialEditState = {
   _id: '', name: '', phone: '', address: '', clothCount: 1, serviceType: '', notes: '', status: '', date: ''
@@ -93,34 +94,24 @@ const MyBookings = () => {
   if (error) return <div style={{ color: 'red', padding: 32 }}>{error}</div>;
 
   return (
-    <div style={{ maxWidth: 600, margin: '40px auto', padding: 24, background: '#f9f9ff', borderRadius: 12 }} className="fade-in">
-      <h2 style={{ marginBottom: 24 }}>Your Bookings</h2>
+    <div className="mybookings-container fade-in">
+      <h2 className="mybookings-title">Your Bookings</h2>
       {bookings.length === 0 ? (
         <div>No bookings found.</div>
       ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+        <ul className="mybookings-list">
           {bookings.map(b => (
-            <li key={b._id} className="animated-card" style={{ marginBottom: 24, padding: 16, background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-              <div><strong>Service:</strong> {b.serviceType}</div>
-              <div><strong>Name:</strong> {b.name}</div>
-              <div><strong>Phone:</strong> {b.phone}</div>
-              <div><strong>Address:</strong> {b.address}</div>
-              <div><strong>Cloth Count:</strong> {b.clothCount}</div>
-              <div><strong>Status:</strong> <span style={{
-                display: 'inline-block',
-                padding: '2px 12px',
-                borderRadius: 12,
-                background: b.status === 'delivered' ? '#16a085' : b.status === 'on the way' ? '#f6c90e' : b.status === 'processed' ? '#f98d3a' : b.status === 'accepted' ? '#0077b6' : b.status === 'cancelled' ? '#888' : b.status === 'parcel reached the hub' ? '#6c63ff' : b.status === 'out for pickup' ? '#00b894' : b.status === 'out for delivery' ? '#fdcb6e' : '#e74c3c',
-                color: '#fff',
-                fontWeight: 600,
-                fontSize: '0.98rem',
-                textTransform: 'capitalize',
-                marginLeft: 6
-              }}>{b.status}</span></div>
+            <li key={b._id} className="mybookings-card animated-card">
+              <div><span className="mybookings-label">Service:</span> {b.serviceType}</div>
+              <div><span className="mybookings-label">Name:</span> {b.name}</div>
+              <div><span className="mybookings-label">Phone:</span> {b.phone}</div>
+              <div><span className="mybookings-label">Address:</span> {b.address}</div>
+              <div><span className="mybookings-label">Cloth Count:</span> {b.clothCount}</div>
+              <div><span className="mybookings-label">Status:</span> <span className={`mybookings-status status-${b.status.replace(/\s/g, '-').toLowerCase()}`}>{b.status}</span></div>
 
               {/* Payment section: show if status is 'parcel reached the hub', 'processed', 'out for delivery', or 'delivered' */}
               {['parcel reached the hub', 'processed', 'out for delivery', 'delivered'].includes(b.status) && (
-                <div style={{ marginTop: 8, background: '#f3f7ff', padding: 10, borderRadius: 8, border: '1px solid #dbeafe' }}>
+                <div className="mybookings-amount-box">
                   {b.status === 'parcel reached the hub' && (!b.amount || b.amount === 0) ? (
                     <span style={{ color: '#888', fontStyle: 'italic' }}>Calculation under process</span>
                   ) : (
@@ -128,7 +119,8 @@ const MyBookings = () => {
                       <>
                         <strong>Amount Due:</strong> ₹{b.amount}
                         <button
-                          style={{ marginLeft: 16, padding: '6px 18px', background: '#0077b6', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 600, cursor: 'pointer' }}
+                          className="mybookings-action-btn"
+                          style={{ marginLeft: 16 }}
                           onClick={() => alert('Payment gateway integration coming soon!')}
                         >
                           Pay Now
@@ -139,21 +131,20 @@ const MyBookings = () => {
                 </div>
               )}
               {b.status === 'cancelled' && b.cancelReason && (
-                <div style={{ color: '#e74c3c', marginTop: 6, fontWeight: 600 }}>
+                <div className="mybookings-cancel">
                   <span>Order Cancelled: {b.cancelReason}</span>
                 </div>
               )}
-              <div><strong>Date:</strong> {new Date(b.date).toLocaleString()}</div>
-              <div style={{ marginTop: 10, display: 'flex', gap: 18 }}>
-                {/* Edit and Delete options only if status is before 'picked up' */}
+              <div className="mybookings-date"><strong>Date:</strong> {new Date(b.date).toLocaleString()}</div>
+              <div className="mybookings-actions">
                 {['pending', 'accepted', 'out for pickup'].includes(b.status) && (
                   <>
-                    <span style={{ color: '#e74c3c', cursor: 'pointer', fontWeight: 600 }} onClick={() => handleDelete(b._id)}>
+                    <button className="mybookings-action-btn delete" onClick={() => handleDelete(b._id)}>
                       Delete
-                    </span>
-                    <span style={{ color: '#2980b9', cursor: 'pointer', fontWeight: 600 }} onClick={() => openEditModal(b)}>
+                    </button>
+                    <button className="mybookings-action-btn edit" onClick={() => openEditModal(b)}>
                       Edit
-                    </span>
+                    </button>
                   </>
                 )}
               </div>
