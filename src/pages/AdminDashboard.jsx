@@ -87,10 +87,12 @@ const AdminDashboard = () => {
                     value={b.status}
                     onChange={e => handleStatusChange(b._id, e.target.value, b.amount)}
                     className="admin-status-select"
+                    style={{ display: b.status === 'picked up' ? 'none' : undefined }}
                   >
                     <option value="pending">Pending</option>
                     <option value="accepted">Accepted</option>
                     <option value="out for pickup">Out for Pickup</option>
+                    <option value="picked up">Picked Up</option>
                     <option value="parcel reached the hub">Parcel Reached the Hub</option>
                     <option value="processed">Processed</option>
                     <option value="out for delivery">Out for Delivery</option>
