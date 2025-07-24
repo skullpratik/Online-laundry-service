@@ -34,9 +34,7 @@ const Hero = ({ onLoginClick }) => {
         </div>
           {/* Removed 'View your booking' link from hero section as requested */}
       </div>
-      <div className="hero-image">
-        <img src="/online-laundry-service-1.png" alt="Laundry Hero"/>
-      </div>
+      <div className="hero-image"></div>
     </div>
   </section>
 );

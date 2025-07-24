@@ -85,7 +85,12 @@ const AdminDashboard = () => {
                   <span className={`admin-status-badge status-${b.status.replace(/\s/g, '-')}`}>{b.status}</span>
                   <select
                     value={b.status}
-                    onChange={e => handleStatusChange(b._id, e.target.value, b.amount)}
+                    onChange={e => {
+                      const newStatus = e.target.value;
+                      // Update local state immediately for UI feedback
+                      setBookings(bookings.map(x => x._id === b._id ? { ...x, status: newStatus } : x));
+                      handleStatusChange(b._id, newStatus, b.amount);
+                    }}
                     className="admin-status-select"
                     style={{ display: b.status === 'picked up' ? 'none' : undefined }}
                   >
