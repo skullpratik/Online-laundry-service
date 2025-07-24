@@ -110,13 +110,28 @@ const MyBookings = () => {
                 display: 'inline-block',
                 padding: '2px 12px',
                 borderRadius: 12,
-                background: b.status === 'delivered' ? '#16a085' : b.status === 'on the way' ? '#f6c90e' : b.status === 'processed' ? '#f98d3a' : b.status === 'accepted' ? '#0077b6' : b.status === 'cancelled' ? '#888' : '#e74c3c',
+                background: b.status === 'delivered' ? '#16a085' : b.status === 'on the way' ? '#f6c90e' : b.status === 'processed' ? '#f98d3a' : b.status === 'accepted' ? '#0077b6' : b.status === 'cancelled' ? '#888' : b.status === 'parcel reached the hub' ? '#6c63ff' : b.status === 'out for pickup' ? '#00b894' : b.status === 'out for delivery' ? '#fdcb6e' : '#e74c3c',
                 color: '#fff',
                 fontWeight: 600,
                 fontSize: '0.98rem',
                 textTransform: 'capitalize',
                 marginLeft: 6
               }}>{b.status}</span></div>
+
+              {/* Payment section: show if status is 'parcel reached the hub', 'processed', 'out for delivery', or 'delivered' */}
+              {['parcel reached the hub', 'processed', 'out for delivery', 'delivered'].includes(b.status) && (
+                <div style={{ marginTop: 8, background: '#f3f7ff', padding: 10, borderRadius: 8, border: '1px solid #dbeafe' }}>
+                  <strong>Amount Due:</strong> {typeof b.amount === 'number' ? `₹${b.amount}` : 'To be updated'}
+                  {typeof b.amount === 'number' && b.amount > 0 && (
+                    <button
+                      style={{ marginLeft: 16, padding: '6px 18px', background: '#0077b6', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 600, cursor: 'pointer' }}
+                      onClick={() => alert('Payment gateway integration coming soon!')}
+                    >
+                      Pay Now
+                    </button>
+                  )}
+                </div>
+              )}
               {b.status === 'cancelled' && b.cancelReason && (
                 <div style={{ color: '#e74c3c', marginTop: 6, fontWeight: 600 }}>
                   <span>Order Cancelled: {b.cancelReason}</span>

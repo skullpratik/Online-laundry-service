@@ -88,9 +88,10 @@ const AdminDashboard = () => {
                   >
                     <option value="pending">Pending</option>
                     <option value="accepted">Accepted</option>
+                    <option value="out for pickup">Out for Pickup</option>
+                    <option value="parcel reached the hub">Parcel Reached the Hub</option>
                     <option value="processed">Processed</option>
-                    <option value="on the way">On the Way</option>
-                    <option value="delivered">Delivered</option>
+                    <option value="out for delivery">Out for Delivery</option>
                     <option value="cancelled">Cancelled</option>
                   </select>
                 </td>
