@@ -1,6 +1,6 @@
 /* Extra text for mobile hero */
 .hero-extra-text {
-  margin-top: 2px;
+  margin-bottom: 2rem;
   font-size: 1.08rem;
   color: #29307a;
   background: rgba(255,255,255,0.85);
@@ -16,11 +16,11 @@
 
 .hero {
   background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 40px;
+  padding-top: 32px;
   font-family: 'Inter', 'Segoe UI', serif;
   position: relative;
   overflow: hidden;
@@ -95,7 +95,7 @@
   text-shadow: 0 2px 8px rgba(255,126,95,0.10);
 }
 .hero-heading {
-  font-size: 3.1rem;
+  font-size: 2.5rem;
   color: #0056b3;
   margin-bottom: 20px;
   font-weight: 900;
@@ -105,7 +105,7 @@
   animation: fadeIn 1.3s;
 }
 .hero-description {
-  font-size: 1.22rem;
+  font-size: 1rem;
   color: #29307a;
   margin-bottom: 36px;
   animation: fadeIn 1.4s;
@@ -160,7 +160,7 @@
 .hero-image {
   flex: 1;
   min-width: 320px;
-  max-width: 480px;
+  max-width: 600px;
   text-align: center;
   animation: fadeIn 1.7s;
   display: flex;
@@ -169,7 +169,10 @@
   position: relative;
 }
 .hero-image img {
-  max-width: 100%;
+  width: 100%;
+  max-width: 700px;
+  min-width: 320px;
+  height: auto;
   border-radius: 32px;
   box-shadow: 0 16px 48px rgba(44,62,80,0.18), 0 2px 8px rgba(0,183,255,0.10);
   animation: imgPopIn 1.2s cubic-bezier(.4,1.4,.6,1) both;
@@ -178,8 +181,8 @@
   transition: transform 0.3s cubic-bezier(.4,1.4,.6,1), opacity 0.3s;
 }
 .hero-image img:hover {
-  transform: scale(1.04) rotate(-1deg);
-  opacity: 0.96;
+  transform: scale(1.07) rotate(-1deg);
+  opacity: 0.98;
 }
 @keyframes imgPopIn {
   from { opacity: 0; transform: scale(0.92); }
@@ -208,6 +211,7 @@
     border-radius: 22px;
     box-shadow: 0 4px 18px rgba(44,62,80,0.10);
     gap: 32px;
+  
   }
   .hero-extra-text {
     margin-top: 18px;

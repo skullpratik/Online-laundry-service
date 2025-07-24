@@ -98,17 +98,32 @@ const AdminDashboard = () => {
                   </select>
                 </td>
                 <td>
-                  <input
-                    type="number"
-                    min="0"
-                    value={b.amount || ''}
-                    onChange={e => {
-                      const newAmount = e.target.value === '' ? undefined : Number(e.target.value);
-                      setBookings(bookings.map(x => x._id === b._id ? { ...x, amount: newAmount } : x));
-                    }}
-                    style={{ width: 80 }}
-                    placeholder="Set ₹"
-                  />
+                  {b.status === 'parcel reached the hub' ? (
+                    <form
+                      onSubmit={e => {
+                        e.preventDefault();
+                        handleStatusChange(b._id, b.status, b.amount);
+                      }}
+                      style={{ display: 'flex', alignItems: 'center', gap: 6 }}
+                    >
+                      <input
+                        type="number"
+                        min="0"
+                        value={b.amount || ''}
+                        onChange={e => {
+                          const newAmount = e.target.value === '' ? undefined : Number(e.target.value);
+                          setBookings(bookings.map(x => x._id === b._id ? { ...x, amount: newAmount } : x));
+                        }}
+                        style={{ width: 70 }}
+                        placeholder="Set ₹"
+                      />
+                      <button type="submit" style={{ padding: '4px 10px', borderRadius: 6, background: '#0077b6', color: '#fff', border: 'none', fontWeight: 600, cursor: 'pointer' }}>
+                        Save
+                      </button>
+                    </form>
+                  ) : (
+                    typeof b.amount === 'number' && b.amount > 0 ? `₹${b.amount}` : <span style={{ color: '#888', fontStyle: 'italic' }}>-</span>
+                  )}
                 </td>
                 <td>{new Date(b.date).toLocaleString()}</td>
               </tr>

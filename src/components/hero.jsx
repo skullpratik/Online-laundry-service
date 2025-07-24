@@ -18,7 +18,7 @@ const Hero = ({ onLoginClick }) => {
           Now, we're making it easier than ever! Clean clothes, just a click away!<br/>
         </p>
         <div className="hero-extra-text">
-          <span style={{color:'#0077b6',fontWeight:600}}>Experience the difference with Shiv Krupa Laundry — your local, trusted, and tech-enabled laundry partner!</span>
+          <span style={{color:'#0077b6',fontWeight:600}}>Experience the difference with SKLdrycleaners — your local, trusted, and tech-enabled laundry partner!</span>
         </div>
         <div className="hero-buttons">
            <Link to="/book-now" className="btn book-now">Book Now</Link>
