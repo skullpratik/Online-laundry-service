@@ -77,14 +77,6 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
     setLoading(true);
     try {
       if (isRegister) {
-          // Try to show backend error message if available
-          if (err && err.message) {
-            setError(err.message);
-          } else if (err && err.response) {
-            setError(err.response.data?.message || 'An error occurred.');
-          } else {
-            setError('An error occurred.');
-          }
         const regPayload = { name: form.name, phone: form.phone, password: form.password };
         if (form.email) regPayload.email = form.email;
         await register(regPayload);
@@ -95,7 +87,14 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
         onClose();
       }
     } catch (err) {
-      setError(err.message);
+      // Try to show backend error message if available
+      if (err && err.message) {
+        setError(err.message);
+      } else if (err && err.response) {
+        setError(err.response.data?.message || 'An error occurred.');
+      } else {
+        setError('An error occurred.');
+      }
     } finally {
       setLoading(false);
     }
