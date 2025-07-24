@@ -67,7 +67,7 @@ const AdminLoginModal = ({ open, onClose }) => {
         <h2 style={{ marginBottom: 16 }}>Admin Login</h2>
         <form onSubmit={handleSubmit}>
           <input
-            type="email"
+            type="text"
             name="email"
             placeholder="Admin Email"
             value={form.email}
