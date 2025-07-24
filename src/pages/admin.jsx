@@ -18,7 +18,7 @@ const AdminLogin = () => {
       <h2>Admin Login</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <input
-          type="email"
+          type="text"
           name="email"
           placeholder="Admin Email"
           value={form.email}
