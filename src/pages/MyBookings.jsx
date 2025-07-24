@@ -121,14 +121,20 @@ const MyBookings = () => {
               {/* Payment section: show if status is 'parcel reached the hub', 'processed', 'out for delivery', or 'delivered' */}
               {['parcel reached the hub', 'processed', 'out for delivery', 'delivered'].includes(b.status) && (
                 <div style={{ marginTop: 8, background: '#f3f7ff', padding: 10, borderRadius: 8, border: '1px solid #dbeafe' }}>
-                  <strong>Amount Due:</strong> {typeof b.amount === 'number' ? `₹${b.amount}` : 'To be updated'}
-                  {typeof b.amount === 'number' && b.amount > 0 && (
-                    <button
-                      style={{ marginLeft: 16, padding: '6px 18px', background: '#0077b6', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 600, cursor: 'pointer' }}
-                      onClick={() => alert('Payment gateway integration coming soon!')}
-                    >
-                      Pay Now
-                    </button>
+                  {b.status === 'parcel reached the hub' && (!b.amount || b.amount === 0) ? (
+                    <span style={{ color: '#888', fontStyle: 'italic' }}>Calculation under process</span>
+                  ) : (
+                    (typeof b.amount === 'number' && b.amount > 0) ? (
+                      <>
+                        <strong>Amount Due:</strong> ₹{b.amount}
+                        <button
+                          style={{ marginLeft: 16, padding: '6px 18px', background: '#0077b6', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 600, cursor: 'pointer' }}
+                          onClick={() => alert('Payment gateway integration coming soon!')}
+                        >
+                          Pay Now
+                        </button>
+                      </>
+                    ) : <span style={{ color: '#888', fontStyle: 'italic' }}>-</span>
                   )}
                 </div>
               )}
