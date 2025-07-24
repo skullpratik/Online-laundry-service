@@ -57,7 +57,7 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
         return;
       }
     } else {
-      // Login validation: require name, phone, password
+      // Login validation: require phone, password only
       if (!form.phone.trim()) {
         setError('Phone number is required.');
         setLoading(false);
@@ -65,16 +65,6 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
       }
       if (!/^\d{10}$/.test(form.phone)) {
         setError('Phone number must be exactly 10 digits.');
-        setLoading(false);
-        return;
-      }
-      if (!form.name.trim()) {
-        setError('Name is required.');
-        setLoading(false);
-        return;
-      }
-      if (/\d/.test(form.name)) {
-        setError('Name cannot contain numbers.');
         setLoading(false);
         return;
       }
