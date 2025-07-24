@@ -85,19 +85,12 @@ const AdminDashboard = () => {
                   <span className={`admin-status-badge status-${b.status.replace(/\s/g, '-')}`}>{b.status}</span>
                   <select
                     value={b.status}
-                    onChange={e => {
-                      const newStatus = e.target.value;
-                      // Update local state immediately for UI feedback
-                      setBookings(bookings.map(x => x._id === b._id ? { ...x, status: newStatus } : x));
-                      handleStatusChange(b._id, newStatus, b.amount);
-                    }}
+                    onChange={e => handleStatusChange(b._id, e.target.value, b.amount)}
                     className="admin-status-select"
-                    style={{ display: b.status === 'picked up' ? 'none' : undefined }}
                   >
                     <option value="pending">Pending</option>
                     <option value="accepted">Accepted</option>
                     <option value="out for pickup">Out for Pickup</option>
-                    <option value="picked up">Picked Up</option>
                     <option value="parcel reached the hub">Parcel Reached the Hub</option>
                     <option value="processed">Processed</option>
                     <option value="out for delivery">Out for Delivery</option>
@@ -105,32 +98,17 @@ const AdminDashboard = () => {
                   </select>
                 </td>
                 <td>
-                  {b.status === 'parcel reached the hub' ? (
-                    <form
-                      onSubmit={e => {
-                        e.preventDefault();
-                        handleStatusChange(b._id, b.status, b.amount);
-                      }}
-                      style={{ display: 'flex', alignItems: 'center', gap: 6 }}
-                    >
-                      <input
-                        type="number"
-                        min="0"
-                        value={b.amount || ''}
-                        onChange={e => {
-                          const newAmount = e.target.value === '' ? undefined : Number(e.target.value);
-                          setBookings(bookings.map(x => x._id === b._id ? { ...x, amount: newAmount } : x));
-                        }}
-                        style={{ width: 70 }}
-                        placeholder="Set ₹"
-                      />
-                      <button type="submit" style={{ padding: '4px 10px', borderRadius: 6, background: '#0077b6', color: '#fff', border: 'none', fontWeight: 600, cursor: 'pointer' }}>
-                        Save
-                      </button>
-                    </form>
-                  ) : (
-                    typeof b.amount === 'number' && b.amount > 0 ? `₹${b.amount}` : <span style={{ color: '#888', fontStyle: 'italic' }}>-</span>
-                  )}
+                  <input
+                    type="number"
+                    min="0"
+                    value={b.amount || ''}
+                    onChange={e => {
+                      const newAmount = e.target.value === '' ? undefined : Number(e.target.value);
+                      setBookings(bookings.map(x => x._id === b._id ? { ...x, amount: newAmount } : x));
+                    }}
+                    style={{ width: 80 }}
+                    placeholder="Set ₹"
+                  />
                 </td>
                 <td>{new Date(b.date).toLocaleString()}</td>
               </tr>
