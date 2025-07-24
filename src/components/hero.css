@@ -14,8 +14,9 @@
 /* Hero.css */
 
 
+/* Fullscreen hero background image */
 .hero {
-  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  background: url('/herobackground2.avif') center center/cover no-repeat !important;
   min-height: 100vh;
   display: flex;
   align-items: flex-start;
@@ -157,29 +158,9 @@
   box-shadow: 0 28px 64px rgba(13, 208, 78, 0.22);
   filter: brightness(1.10);
 }
+/* Remove hero-image block, background is now full screen */
 .hero-image {
-  flex: 1;
-  min-width: 320px;
-  max-width: 480px;
-  text-align: center;
-  animation: fadeIn 1.7s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.hero-image img {
-  max-width: 100%;
-  border-radius: 32px;
-  box-shadow: 0 16px 48px rgba(44,62,80,0.18), 0 2px 8px rgba(0,183,255,0.10);
-  animation: imgPopIn 1.2s cubic-bezier(.4,1.4,.6,1) both;
-  border: 4px solid rgba(255,255,255,0.7);
-  background: rgba(255,255,255,0.5);
-  transition: transform 0.3s cubic-bezier(.4,1.4,.6,1), opacity 0.3s;
-}
-.hero-image img:hover {
-  transform: scale(1.04) rotate(-1deg);
-  opacity: 0.96;
+  display: none !important;
 }
 @keyframes imgPopIn {
   from { opacity: 0; transform: scale(0.92); }
@@ -201,6 +182,15 @@
   .hero {
     background: url('/herobackground2.avif') center center/cover no-repeat !important;
     min-height: 100vh;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.85); /* overlay for readability */
+    z-index: 1;
+    pointer-events: none;
   }
   .hero-content {
     flex-direction: column;
@@ -208,10 +198,12 @@
     min-height: 92vh;
     margin-top: 0;
     padding: 38px 4vw 32px 4vw;
-    background: rgba(255,255,255,0.98);
+    background: none;
     border-radius: 22px;
     box-shadow: 0 4px 18px rgba(44,62,80,0.10);
     gap: 32px;
+    position: relative;
+    z-index: 2;
   }
   .hero-extra-text {
     margin-top: 18px;
