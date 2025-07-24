@@ -9,7 +9,6 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Simple client-side admin check
     if (localStorage.getItem('isAdmin') !== 'true') {
       navigate('/admin-login');
       return;
@@ -30,16 +29,18 @@ const AdminDashboard = () => {
       });
   }, [navigate]);
 
-  const handleStatusChange = async (id, newStatus) => {
+  const handleStatusChange = async (id, newStatus, amount) => {
     let cancelReason = '';
     if (newStatus === 'cancelled') {
       cancelReason = prompt('Enter reason for cancellation:', 'Order cancelled: out of range') || 'Order cancelled: out of range';
     }
     try {
+      const body = cancelReason ? { status: newStatus, cancelReason } : { status: newStatus };
+      if (typeof amount === 'number') body.amount = amount;
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/status/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cancelReason ? { status: newStatus, cancelReason } : { status: newStatus })
+        body: JSON.stringify(body)
       });
       if (!res.ok) throw new Error('Failed to update status');
       const updated = await res.json();
@@ -67,6 +68,7 @@ const AdminDashboard = () => {
               <th>Service</th>
               <th>Notes</th>
               <th>Status</th>
+              <th>Amount (₹)</th>
               <th>Date</th>
             </tr>
           </thead>
@@ -83,7 +85,7 @@ const AdminDashboard = () => {
                   <span className={`admin-status-badge status-${b.status.replace(/\s/g, '-')}`}>{b.status}</span>
                   <select
                     value={b.status}
-                    onChange={e => handleStatusChange(b._id, e.target.value)}
+                    onChange={e => handleStatusChange(b._id, e.target.value, b.amount)}
                     className="admin-status-select"
                   >
                     <option value="pending">Pending</option>
@@ -95,6 +97,19 @@ const AdminDashboard = () => {
                     <option value="cancelled">Cancelled</option>
                   </select>
                 </td>
+                <td>
+                  <input
+                    type="number"
+                    min="0"
+                    value={b.amount || ''}
+                    onChange={e => {
+                      const newAmount = e.target.value === '' ? undefined : Number(e.target.value);
+                      setBookings(bookings.map(x => x._id === b._id ? { ...x, amount: newAmount } : x));
+                    }}
+                    style={{ width: 80 }}
+                    placeholder="Set ₹"
+                  />
+                </td>
                 <td>{new Date(b.date).toLocaleString()}</td>
               </tr>
             ))}
@@ -105,4 +120,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard; 
+export default AdminDashboard;
