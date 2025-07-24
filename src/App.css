@@ -1,18 +1,28 @@
 /* App.css */
+
 main {
   padding-top: 0;
+  background: none;
 }
 
 .page-section {
   max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 16px;
+  margin: 48px auto;
+  padding: 32px 32px 40px 32px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.10);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   animation: fadeIn 1.1s cubic-bezier(.4,1.4,.6,1) both;
+  transition: box-shadow 0.3s, background 0.3s;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .page-section {
-    margin: 24px auto;
-    padding: 0 8px;
+    padding: 22px 4vw 28px 4vw;
+    margin: 18px auto;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(44,62,80,0.10);
   }
 }

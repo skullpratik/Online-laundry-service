@@ -1,12 +1,14 @@
+
 .page-section {
-  padding: 48px 8px;
+  padding: 56px 16px 24px 16px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 32px auto;
   font-family: 'Segoe UI', 'Roboto', sans-serif;
-  color: #2c3e50;
-  background: linear-gradient(135deg, #e0f7fa 0%, #f9f9ff 60%, #a1c4fd 100%);
+  color: #1a2233;
+  background: linear-gradient(120deg, #e0eafc 0%, rgba(207,222,243,0.92) 90%, rgba(207,222,243,0.7) 100%);
   border-radius: 0 0 32px 32px;
-  box-shadow: 0 8px 32px rgba(0,183,255,0.04);
+  box-shadow: 0 8px 32px rgba(44,62,80,0.10);
+  transition: background 0.3s, padding 0.3s;
 }
 
 .page-section h1 {
@@ -33,25 +35,30 @@
   gap: 32px;
 }
 
+
 .service-card {
-  background: linear-gradient(120deg, #fff 60%, #e0f7fa 100%);
-  border-radius: 20px;
-  padding: 32px 24px 28px 24px;
-  box-shadow: 0 8px 32px rgba(0, 183, 255, 0.08);
-  transition: transform 0.3s cubic-bezier(.4,1.4,.6,1), box-shadow 0.3s cubic-bezier(.4,1.4,.6,1);
+  background: rgba(255,255,255,0.82);
+  border-radius: 22px;
+  padding: 36px 28px 32px 28px;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.13);
+  transition: transform 0.3s cubic-bezier(.4,1.4,.6,1), box-shadow 0.3s cubic-bezier(.4,1.4,.6,1), background 0.3s;
   border-top: 6px solid #00b4d8;
   position: relative;
   overflow: hidden;
   animation: fadeInCard 1.1s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 @keyframes fadeInCard {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 .service-card:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 16px 40px rgba(0, 119, 182, 0.13);
+  transform: translateY(-14px) scale(1.05);
+  box-shadow: 0 20px 48px rgba(0, 119, 182, 0.18);
   border-top-color: #0077b6;
+  background: rgba(255,255,255,0.96);
 }
 
 .service-card::before {
@@ -86,7 +93,8 @@
 
 @media (max-width: 768px) {
   .page-section {
-    padding: 28px 4px;
+    padding: 20px 4px 12px 4px;
+    margin-bottom: 18px;
     border-radius: 0 0 18px 18px;
   }
   .services-container {

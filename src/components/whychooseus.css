@@ -6,10 +6,13 @@
   font-family: "Times New Roman", serif;
 }
 
+
 .why-choose-us {
-  background: #f6fafd;
-  padding: 60px 20px;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  padding: 64px 20px 48px 20px;
   text-align: center;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.10);
 }
 
 .why-choose-us h2 {
@@ -41,19 +44,23 @@
   padding: 0 20px;
 }
 
+
 .feature {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  border: 1px solid #48cae4;
+  background: rgba(255,255,255,0.72);
+  padding: 36px 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+  border: 1.5px solid #a1c4fd;
   cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .feature:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 15px 35px rgba(0,119,182,0.15);
+  transform: translateY(-12px) scale(1.04);
+  box-shadow: 0 16px 40px rgba(0,119,182,0.18);
+  background: rgba(255,255,255,0.92);
 }
 
 .feature h3 {
@@ -68,9 +75,11 @@
   line-height: 1.6;
 }
 
+
 @media (max-width: 768px) {
   .why-choose-us {
-    padding: 32px 4px;
+    padding: 32px 4px 24px 4px;
+    border-radius: 12px;
   }
   .why-choose-us h2 {
     font-size: 1.5rem;
@@ -83,7 +92,7 @@
   }
   .feature {
     padding: 18px 8px;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 1rem;
   }
   .feature h3 {

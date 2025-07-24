@@ -1,5 +1,21 @@
-/* index.css */
+@media (max-width: 900px) {
+  body {
+    font-size: 1.08rem;
+  }
+  .glass {
+    border-radius: 22px;
+    padding: 8px 2vw;
+    box-shadow: 0 4px 18px rgba(44,62,80,0.10);
+  }
+  .page-section, .about-wrapper, .booking-form-container, .testimonial-section, .review-form-section, .services-container, .pricing-container {
+    padding: 22px 4vw 28px 4vw;
+    margin: 18px auto;
+    border-radius: 18px;
+    box-shadow: 0 4px 18px rgba(44,62,80,0.10);
+  }
+}
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+/* index.css */
 
 * {
   margin: 0;
@@ -13,23 +29,27 @@ html {
 
 body {
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(-45deg, #f6fafd, #e0f7fa, #b2dfdb, #48cae4);
-  background-size: 400% 400%;
-  animation: gradientBG 12s ease infinite;
-  color: #222;
-  line-height: 1.6;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  background-attachment: fixed;
+  color: #1a2233;
+  line-height: 1.7;
   min-height: 100vh;
   transition: background 0.5s;
-}
-
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main {
- padding-top: 0;
+  padding-top: 0;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.18);
 }
 
 .page-section, .about-wrapper, .booking-form-container, .fade-in, .testimonial-section, .review-form-section, .services-container, .pricing-container {
@@ -37,12 +57,13 @@ main {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  background: #f0f0f0;
+  width: 10px;
+  background: #e0eafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #b2dfdb;
+  background: linear-gradient(135deg, #a1c4fd 0%, #48cae4 100%);
   border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(76,161,175,0.08);
 }
 
 .fade-in {
