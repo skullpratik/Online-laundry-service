@@ -17,17 +17,7 @@ const Hero = ({ onLoginClick }) => {
           We’ve been serving your laundry needs for years with care and quality.<br/>
           Now, we're making it easier than ever! Clean clothes, just a click away!<br/>
         </p>
-        <div className="hero-extra-text">
-          <p>
-            <strong>Why choose us?</strong><br/>
-            • Free pickup & delivery at your doorstep<br/>
-            • Express 24-hour service available<br/>
-            • Eco-friendly detergents & premium care<br/>
-            • 100% satisfaction guarantee<br/>
-            <br/>
-            <span style={{color:'#0077b6',fontWeight:600}}>Experience the difference with Shiv Krupa Laundry — your local, trusted, and tech-enabled laundry partner!</span>
-          </p>
-        </div>
+        {/* Removed extra 'why choose us' text as requested */}
         <div className="hero-buttons">
            <Link to="/book-now" className="btn book-now">Book Now</Link>
           <a
