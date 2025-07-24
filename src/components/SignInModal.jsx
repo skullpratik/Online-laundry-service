@@ -87,7 +87,14 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
     setLoading(true);
     try {
       if (isRegister) {
-        // Send name, phone, password, and optional email for backend registration
+          // Try to show backend error message if available
+          if (err && err.message) {
+            setError(err.message);
+          } else if (err && err.response) {
+            setError(err.response.data?.message || 'An error occurred.');
+          } else {
+            setError('An error occurred.');
+          }
         const regPayload = { name: form.name, phone: form.phone, password: form.password };
         if (form.email) regPayload.email = form.email;
         await register(regPayload);
@@ -167,16 +174,6 @@ const SignInModal = ({ open, onClose, defaultMode = 'login' }) => {
                 name="phone"
                 placeholder="Phone (required, 10 digits)"
                 value={form.phone}
-                onChange={handleChange}
-                className="modal-input"
-                autoComplete="off"
-                required
-              />
-              <input
-                type="text"
-                name="name"
-                placeholder="Name (required)"
-                value={form.name}
                 onChange={handleChange}
                 className="modal-input"
                 autoComplete="off"

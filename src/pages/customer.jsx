@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './login.css';
 
 const CustomerLogin = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ phone: '', password: '' });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -10,7 +10,7 @@ const CustomerLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Email/Phone: ${form.email}\nPassword: ${form.password}`);
+    alert(`Phone: ${form.phone}\nPassword: ${form.password}`);
   };
 
   return (
@@ -20,9 +20,9 @@ const CustomerLogin = () => {
       <form className="login-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          name="email"
-          placeholder="Email or Phone"
-          value={form.email}
+          name="phone"
+          placeholder="Phone"
+          value={form.phone}
           onChange={handleChange}
           required
         />
